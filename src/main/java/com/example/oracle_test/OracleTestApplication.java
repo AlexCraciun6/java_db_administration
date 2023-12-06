@@ -64,8 +64,8 @@ public class OracleTestApplication implements CommandLineRunner {
         System.out.println("12.06:");
         System.out.println("a:");
 
-        List<Catalog1_6a> furnziori_6a = Interogari.getInterogare6a(jdbcTemplate);
-        furnziori_6a.forEach(System.out::println);
+        List<Catalog1_6a> cataloage_6a = Interogari.getInterogare6a(jdbcTemplate);
+        cataloage_6a.forEach(System.out::println);
 
         System.out.println("b:");
 

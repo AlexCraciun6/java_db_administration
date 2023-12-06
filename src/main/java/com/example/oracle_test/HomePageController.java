@@ -13,7 +13,7 @@ public class HomePageController {
     @Autowired
     public JdbcTemplate jdbcTemplate;
 
-    public class Ending{
+    public static class Ending{
         private String ending;
 
         public String getEnding() {
@@ -52,6 +52,56 @@ public class HomePageController {
         return "interogare_3b";
     }
 
+    @GetMapping("/interogare4a")
+    public String interogare4a(Model model){
+
+        List<Comanda> comenzi_4a = Interogari.getInterogare4a(jdbcTemplate);
+
+        model.addAttribute("comenzi_4a", comenzi_4a);
+        return "interogare_4a";
+    }
+
+    @GetMapping("/interogare4b")
+    public String interogare4b(Model model){
+        List<Comanda_4b> comenzi_4b = Interogari.getInterogare4b(jdbcTemplate);
+
+        model.addAttribute("comenzi_4b", comenzi_4b);
+        return "interogare_4b";
+    }
+
+    @GetMapping("/interogare5a")
+    public String interogare5a(Model model){
+
+        List<String> furnizori_5a = Interogari.getInterogare5a(jdbcTemplate);
+
+        model.addAttribute("furnizori_5a", furnizori_5a);
+        return "interogare_5a";
+    }
+
+    @GetMapping("/interogare5b")
+    public String interogare5b(Model model){
+        Catalog1 piesa = Interogari.getInterogare5b(jdbcTemplate);
+
+        model.addAttribute("piesa", piesa);
+        return "interogare_5b";
+    }
+
+    @GetMapping("/interogare6a")
+    public String interogare6a(Model model){
+
+        List<Catalog1_6a> cataloage_6a = Interogari.getInterogare6a(jdbcTemplate);
+
+        model.addAttribute("cataloage_6a", cataloage_6a);
+        return "interogare_6a";
+    }
+
+    @GetMapping("/interogare6b")
+    public String interogare6b(Model model){
+        List<Comanda_6b> comenzi_6b = Interogari.getInterogare6b(jdbcTemplate);
+
+        model.addAttribute("comenzi_6b", comenzi_6b);
+        return "interogare_6b";
+    }
 
 
     @GetMapping
