@@ -5,7 +5,7 @@ import java.util.Optional;
 
 public interface Dao<T> {
 
-    List<T> findAll();
+    List<T> readAll();
 
     void create(T t);
 

@@ -1,0 +1,101 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Catalog1</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+</head>
+<body>
+
+<div class="container my-5">
+    <div class="row p-4 pb-0 pe-lg-0 pt-lg-5 align-items-center rounded-3 border shadow-lg">
+        <div class="p-3 p-lg-5 pt-lg-3">
+
+            <h1>Tabela Catalog1</h1>
+            <br>
+            <table class="table table-bordered border-primary table-striped table-hover">
+
+                <thead>
+                <tr>
+                    <th scope="col">Idf</th>
+                    <th scope="col">Idp</th>
+                    <th scope="col">Pret</th>
+                    <th scope="col">Moneda</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="catalog1: ${cataloage1}">
+                    <td th:text="${catalog1.getIdf()}"></td>
+                    <td th:text="${catalog1.getIdp()}"></td>
+                    <td th:text="${catalog1.getPret()}"></td>
+                    <td th:text="${catalog1.getMoneda()}"></td>
+                </tr>
+
+                </tbody>
+            </table>
+
+            <br>
+
+            <h2>Adaugare catalog</h2>
+            <form action="#" th:action="@{/catalog1_nou}" th:object="${catalog1_nou}" method="post">
+                <div class="mb-3">
+                    <label for="idf" class="form-label">Idf</label>
+                    <input th:field="*{idf}" type="text" class="form-control" id="idf"  aria-label="Username" aria-describedby="basic-addon1" size="100">
+                    <label for="idp" class="form-label">Idp</label>
+                    <input th:field="*{idp}" type="text" class="form-control" id="idp"  aria-label="Username" aria-describedby="basic-addon1" size="100">
+                    <label for="pret" class="form-label">Pret</label>
+                    <input th:field="*{pret}" type="text" class="form-control" id="pret"  aria-label="Username" aria-describedby="basic-addon1" size="100">
+                    <label for="moneda" class="form-label">Moneda</label>
+                    <input th:field="*{moneda}" type="text" class="form-control" id="moneda"  aria-label="Username" aria-describedby="basic-addon1" size="100">
+                </div>
+
+                <input type="submit" class="btn btn-primary" role="button" value="Adauga">
+
+            </form>
+
+            <br>
+
+            <h2>Stergere catalog</h2>
+            <form action="#" th:action="@{/sterge_catalog1}" th:object="${sterge_catalog1}" method="post">
+                <div class="mb-3">
+                    <label for="idf2" class="form-label">Idf</label>
+                    <input th:field="*{idf}" type="text" class="form-control" id="idf2"  aria-label="Username" aria-describedby="basic-addon1" size="100">
+                    <label for="idp2" class="form-label">Idp</label>
+                    <input th:field="*{idp}" type="text" class="form-control" id="idp2"  aria-label="Username" aria-describedby="basic-addon1" size="100">
+                </div>
+
+                <input type="submit" class="btn btn-primary" role="button" value="Sterge">
+
+            </form>
+
+            <br>
+
+            <h2>Modificare catalog</h2>
+            <form action="#" th:action="@{/update_catalog1}" th:object="${update_catalog1}" method="post">
+                <div class="mb-3">
+                    <label for="idf3" class="form-label">Idf</label>
+                    <input th:field="*{idf}" type="text" class="form-control" id="idf3"  aria-label="Username" aria-describedby="basic-addon1" size="100">
+                    <label for="idp3" class="form-label">Idp</label>
+                    <input th:field="*{idp}" type="text" class="form-control" id="idp3" aria-label="Username" aria-describedby="basic-addon1" size="100">
+                    <label for="pret3" class="form-label">Pret</label>
+                    <input th:field="*{pret}" type="text" class="form-control" id="pret3"  aria-label="Username" aria-describedby="basic-addon1" size="100">
+                    <label for="moneda3" class="form-label">Moneda</label>
+                    <input th:field="*{moneda}" type="text" class="form-control" id="moneda3"  aria-label="Username" aria-describedby="basic-addon1" size="100">
+                </div>
+
+                <input type="submit" class="btn btn-primary" role="button" value="Modifica">
+
+            </form>
+
+
+        </div>
+    </div>
+</div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+</body>
+</html>
+
+

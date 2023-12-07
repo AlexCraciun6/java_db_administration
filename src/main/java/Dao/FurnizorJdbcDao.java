@@ -1,7 +1,6 @@
 package Dao;
 
 import com.example.oracle_test.Furnizor;
-import org.springframework.dao.IncorrectResultSizeDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.stereotype.Component;
@@ -19,7 +18,7 @@ public class FurnizorJdbcDao implements Dao<Furnizor> {
     }
 
     @Override
-    public List<Furnizor> findAll() {
+    public List<Furnizor> readAll() {
         return jdbcTemplate.query(
                 "SELECT * from FURNIZORI",
                 BeanPropertyRowMapper.newInstance(Furnizor.class));

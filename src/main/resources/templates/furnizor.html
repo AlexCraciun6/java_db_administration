@@ -46,10 +46,11 @@
                     <input th:field="*{adresa}" type="text" class="form-control" id="adresa"  aria-label="Username" aria-describedby="basic-addon1" size="100">
                 </div>
 
-                <input type="submit" class="btn btn-primary" role="button">
+                <input type="submit" class="btn btn-primary" role="button" value="Adauga">
 
             </form>
 
+            <br>
 
             <h2>Stergere furnizor</h2>
             <form action="#" th:action="@{/sterge_furnizor}" th:object="${sterge_furnizor}" method="post">
@@ -58,9 +59,11 @@
                     <input th:field="*{idf}" type="text" class="form-control" id="idf2"  aria-label="Username" aria-describedby="basic-addon1" size="100">
                 </div>
 
-                <input type="submit" class="btn btn-primary" role="button">
+                <input type="submit" class="btn btn-primary" role="button" value="Sterge">
 
             </form>
+
+            <br>
 
             <h2>Modificare furnizor</h2>
             <form action="#" th:action="@{/update_furnizor}" th:object="${update_furnizor}" method="post">
@@ -73,7 +76,7 @@
                     <input th:field="*{adresa}" type="text" class="form-control" id="adresa3"  aria-label="Username" aria-describedby="basic-addon1" size="100">
                 </div>
 
-                <input type="submit" class="btn btn-primary" role="button">
+                <input type="submit" class="btn btn-primary" role="button" value="Modifica">
 
             </form>
 
