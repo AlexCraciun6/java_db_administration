@@ -22,7 +22,6 @@ public class OracleTestApplication implements CommandLineRunner {
     }
 
 
-
     @Override
     public void run(String... args) throws Exception {
 

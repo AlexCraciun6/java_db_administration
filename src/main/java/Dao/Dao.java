@@ -9,9 +9,9 @@ public interface Dao<T> {
 
     void create(T t);
 
-    Optional<T> findById(int id);
+//    Optional<T> findById(int id);
 
-    void update(T t, int id);
+    void update(T t);
 
     void deleteById(int id);
 

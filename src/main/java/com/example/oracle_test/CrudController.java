@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 public class CrudController {
@@ -25,6 +26,8 @@ public class CrudController {
         model.addAttribute("furnizori", furnizori);
         model.addAttribute("furnizor_nou", new Furnizor());
         model.addAttribute("sterge_furnizor", new Furnizor());
+//        model.addAttribute("furnizor_by_idf", new Furnizor());
+        model.addAttribute("update_furnizor", new Furnizor());
 
         return "furnizor";
     }
@@ -44,6 +47,23 @@ public class CrudController {
         FurnizorJdbcDao fDao = new FurnizorJdbcDao(jdbcTemplate);
 
         fDao.deleteById(furnizor.getIdf());
+        return "redirect:/furnizor";
+    }
+
+//    @PostMapping("/furnizor_by_idf")
+//    public String furnizorByIdf(@ModelAttribute Furnizor furnizor){
+//        FurnizorJdbcDao fDao = new FurnizorJdbcDao(jdbcTemplate);
+//
+//        Optional<Furnizor> f = fDao.findById(furnizor.getIdf());
+//        System.out.println(f);
+//        return "redirect:/furnizor";
+//    }
+
+    @PostMapping("/update_furnizor")
+    public String updateFurnizor(@ModelAttribute Furnizor furnizor){
+        FurnizorJdbcDao fDao = new FurnizorJdbcDao(jdbcTemplate);
+
+        fDao.update(furnizor);
         return "redirect:/furnizor";
     }
 }

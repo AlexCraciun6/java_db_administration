@@ -1,6 +1,7 @@
 package Dao;
 
 import com.example.oracle_test.Furnizor;
+import org.springframework.dao.IncorrectResultSizeDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.stereotype.Component;
@@ -33,14 +34,25 @@ public class FurnizorJdbcDao implements Dao<Furnizor> {
         }
     }
 
-    @Override
-    public Optional<Furnizor> findById(int id) {
-        return Optional.empty();
-    }
+//    @Override
+//    public Optional<Furnizor> findById(int idf) {
+//        try {
+//            Furnizor furnizor = jdbcTemplate.queryForObject("SELECT * FROM FURNIZORI WHERE IDF=?",
+//                    BeanPropertyRowMapper.newInstance(Furnizor.class), idf);
+//
+//            return Optional.ofNullable(furnizor);
+//        } catch (IncorrectResultSizeDataAccessException e) {
+//            return Optional.empty();
+//        }
+//    }
 
     @Override
-    public void update(Furnizor furnizor, int id) {
-
+    public void update(Furnizor furnizor) {
+        int insert = jdbcTemplate.update("UPDATE FURNIZORI SET NUMEF=?, ADRESA=? WHERE IDF=?",
+                 furnizor.getNumef(), furnizor.getAdresa(), furnizor.getIdf() );
+        if(insert == 1){
+            System.out.println("Modificat furnizor");
+        }
     }
 
     @Override
