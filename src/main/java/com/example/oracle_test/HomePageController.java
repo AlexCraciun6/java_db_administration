@@ -26,10 +26,13 @@ public class HomePageController {
 
     }
 
+    @GetMapping("/crud")
+    public String getCrudOperations(){
+        return "crud";
+    }
+
     @GetMapping("/get_data_3a")
     public String getData3a(Model model){
-
-
 
         model.addAttribute("ending", new Ending());
         return "get_data_3a";

@@ -1,5 +1,6 @@
 package com.example.oracle_test;
 
+import Dao.FurnizorJdbcDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -31,8 +32,8 @@ public class OracleTestApplication implements CommandLineRunner {
         System.out.println("a:");
 
 
-        List<Furnizor> furnizori_3a = Interogari.getInterogare3a(jdbcTemplate, 8);
-        furnizori_3a.forEach(System.out::println);
+//        List<Furnizor> furnizori_3a = Interogari.getInterogare3a(jdbcTemplate, 8);
+//        furnizori_3a.forEach(System.out::println);
 
         System.out.println("b:");
 
