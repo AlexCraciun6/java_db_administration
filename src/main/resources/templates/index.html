@@ -1,50 +1,66 @@
 <!doctype html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html th:replace="~{layout/base_layout :: layout(~{::title}, ~{::main})}" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Databases app</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 </head>
 <body>
-<div class="px-4 py-5 my-5 text-center">
-    <img th:src="@{db.png}" src="../static/db.png" alt="database photo" class="d-block mx-auto mb-4" height="200">
-    <h1 class="display-5 fw-bold text-body-emphasis">Home Page</h1>
-    <div class="col-lg-6 mx-auto">
-        <p class="lead mb-4">Aceasta este pagina principala a aplicatiei web corespunzatoare subiectului 12</p>
-        <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
-            <a href="http://localhost:8080/get_data_3a" class="btn btn-primary" role="button">Go to Interogare 3a</a>
+
+<main>
+
+    <div class="px-4 py-5 text-center">
+        <img th:src="@{db.png}" src="../static/db.png" alt="database photo" class="d-block mx-auto mb-4" height="200">
+        <h1 class="display-5 fw-bold text-body-emphasis">Home Page</h1>
+        <div class="col-lg-6 mx-auto">
+            <p class="lead mb-4">Aceasta este pagina principala a aplicatiei web corespunzatoare subiectului 12</p>
+            <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+                <a href="http://localhost:8080/get_data_3a" class="btn btn-primary" role="button">Go to Interogare
+                    3a</a>
+                <br>
+                <a href="http://localhost:8080/interogare3b" class="btn btn-primary" role="button">Go to Interogare
+                    3b</a>
+            </div>
             <br>
-            <a href="http://localhost:8080/interogare3b" class="btn btn-primary" role="button">Go to Interogare 3b</a>
-        </div>
-        <br>
-        <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
-            <a href="http://localhost:8080/interogare4a" class="btn btn-primary" role="button">Go to Interogare 4a</a>
+            <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+                <a href="http://localhost:8080/interogare4a" class="btn btn-primary" role="button">Go to Interogare
+                    4a</a>
+                <br>
+                <a href="http://localhost:8080/interogare4b" class="btn btn-primary" role="button">Go to Interogare
+                    4b</a>
+            </div>
             <br>
-            <a href="http://localhost:8080/interogare4b" class="btn btn-primary" role="button">Go to Interogare 4b</a>
-        </div>
-        <br>
-        <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
-            <a href="http://localhost:8080/interogare5a" class="btn btn-primary" role="button">Go to Interogare 5a</a>
+            <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+                <a href="http://localhost:8080/interogare5a" class="btn btn-primary" role="button">Go to Interogare
+                    5a</a>
+                <br>
+                <a href="http://localhost:8080/interogare5b" class="btn btn-primary" role="button">Go to Interogare
+                    5b</a>
+            </div>
             <br>
-            <a href="http://localhost:8080/interogare5b" class="btn btn-primary" role="button">Go to Interogare 5b</a>
-        </div>
-        <br>
-        <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
-            <a href="http://localhost:8080/interogare6a" class="btn btn-primary" role="button">Go to Interogare 6a</a>
-            <br>
-            <a href="http://localhost:8080/interogare6b" class="btn btn-primary" role="button">Go to Interogare 6b</a>
-        </div>
-        <br><br>
-        <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
-            <a href="http://localhost:8080/crud" class="btn btn-primary" role="button">Crud Operations</a>
+            <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+                <a href="http://localhost:8080/interogare6a" class="btn btn-primary" role="button">Go to Interogare
+                    6a</a>
+                <br>
+                <a href="http://localhost:8080/interogare6b" class="btn btn-primary" role="button">Go to Interogare
+                    6b</a>
+            </div>
+            <br><br>
+            <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+                <a href="http://localhost:8080/crud" class="btn btn-primary" role="button">CRUD Operations</a>
+            </div>
         </div>
     </div>
-</div>
 
+    <div class="b-example-divider"></div>
 
+</main>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+        crossorigin="anonymous"></script>
 </body>
 </html>
 

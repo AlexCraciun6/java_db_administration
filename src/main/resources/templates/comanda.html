@@ -1,103 +1,120 @@
 <!doctype html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html th:replace="~{layout/base_layout :: layout(~{::title}, ~{::main})}" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Comenzi</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 </head>
 <body>
 
-<div class="container my-5">
-    <div class="row p-4 pb-0 pe-lg-0 pt-lg-5 align-items-center rounded-3 border shadow-lg">
-        <div class="p-3 p-lg-5 pt-lg-3">
+<main>
 
-            <h1>Tabela Comenzi</h1>
-            <br>
-            <table class="table table-bordered border-primary table-striped table-hover">
+    <div class="container my-5">
+        <div class="row p-4 pb-0 pe-lg-0 pt-lg-5 align-items-center rounded-3 border shadow-lg">
+            <div class="p-3 p-lg-5 pt-lg-3">
 
-                <thead>
-                <tr>
-                    <th scope="col">Idc</th>
-                    <th scope="col">Idf</th>
-                    <th scope="col">Idp</th>
-                    <th scope="col">Cantitate</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr th:each="comanda: ${comenzi}">
-                    <td th:text="${comanda.getIdc()}"></td>
-                    <td th:text="${comanda.getIdf()}"></td>
-                    <td th:text="${comanda.getIdp()}"></td>
-                    <td th:text="${comanda.getCantitate()}"></td>
-                </tr>
+                <h1>Tabela Comenzi</h1>
+                <br>
+                <table class="table table-bordered border-primary table-striped table-hover">
 
-                </tbody>
-            </table>
+                    <thead>
+                    <tr>
+                        <th scope="col">Idc</th>
+                        <th scope="col">Idf</th>
+                        <th scope="col">Idp</th>
+                        <th scope="col">Cantitate</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="comanda: ${comenzi}">
+                        <td th:text="${comanda.getIdc()}"></td>
+                        <td th:text="${comanda.getIdf()}"></td>
+                        <td th:text="${comanda.getIdp()}"></td>
+                        <td th:text="${comanda.getCantitate()}"></td>
+                    </tr>
 
-            <br>
+                    </tbody>
+                </table>
 
-            <h2>Adaugare comanda</h2>
-            <form action="#" th:action="@{/comanda_noua}" th:object="${comanda_noua}" method="post">
-                <div class="mb-3">
-                    <label for="idc" class="form-label">Idc</label>
-                    <input th:field="*{idc}" type="text" class="form-control" id="idc"  aria-label="Username" aria-describedby="basic-addon1" size="100">
-                    <label for="idf" class="form-label">Idf</label>
-                    <input th:field="*{idf}" type="text" class="form-control" id="idf"  aria-label="Username" aria-describedby="basic-addon1" size="100">
-                    <label for="idp" class="form-label">Idp</label>
-                    <input th:field="*{idp}" type="text" class="form-control" id="idp"  aria-label="Username" aria-describedby="basic-addon1" size="100">
-                    <label for="cantitate" class="form-label">cantiate</label>
-                    <input th:field="*{cantitate}" type="text" class="form-control" id="cantitate"  aria-label="Username" aria-describedby="basic-addon1" size="100">
-                </div>
+                <br>
 
-                <input type="submit" class="btn btn-primary" role="button" value="Adauga">
+                <h2>Adaugare comanda</h2>
+                <form action="#" th:action="@{/comanda_noua}" th:object="${comanda_noua}" method="post">
+                    <div class="mb-3">
+                        <label for="idc" class="form-label">Idc</label>
+                        <input th:field="*{idc}" type="text" class="form-control" id="idc" aria-label="Username"
+                               aria-describedby="basic-addon1" size="100">
+                        <label for="idf" class="form-label">Idf</label>
+                        <input th:field="*{idf}" type="text" class="form-control" id="idf" aria-label="Username"
+                               aria-describedby="basic-addon1" size="100">
+                        <label for="idp" class="form-label">Idp</label>
+                        <input th:field="*{idp}" type="text" class="form-control" id="idp" aria-label="Username"
+                               aria-describedby="basic-addon1" size="100">
+                        <label for="cantitate" class="form-label">cantiate</label>
+                        <input th:field="*{cantitate}" type="text" class="form-control" id="cantitate"
+                               aria-label="Username" aria-describedby="basic-addon1" size="100">
+                    </div>
 
-            </form>
+                    <input type="submit" class="btn btn-primary" role="button" value="Adauga">
 
-            <br>
+                </form>
 
-            <h2>Stergere comanda</h2>
-            <form action="#" th:action="@{/sterge_comanda}" th:object="${sterge_comanda}" method="post">
-                <div class="mb-3">
-                    <label for="idc2" class="form-label">Idc</label>
-                    <input th:field="*{idc}" type="text" class="form-control" id="idc2"  aria-label="Username" aria-describedby="basic-addon1" size="100">
-                    <label for="idf2" class="form-label">Idf</label>
-                    <input th:field="*{idf}" type="text" class="form-control" id="idf2"  aria-label="Username" aria-describedby="basic-addon1" size="100">
-                    <label for="idp2" class="form-label">Idp</label>
-                    <input th:field="*{idp}" type="text" class="form-control" id="idp2"  aria-label="Username" aria-describedby="basic-addon1" size="100">
+                <br>
 
-                </div>
+                <h2>Stergere comanda</h2>
+                <form action="#" th:action="@{/sterge_comanda}" th:object="${sterge_comanda}" method="post">
+                    <div class="mb-3">
+                        <label for="idc2" class="form-label">Idc</label>
+                        <input th:field="*{idc}" type="text" class="form-control" id="idc2" aria-label="Username"
+                               aria-describedby="basic-addon1" size="100">
+                        <label for="idf2" class="form-label">Idf</label>
+                        <input th:field="*{idf}" type="text" class="form-control" id="idf2" aria-label="Username"
+                               aria-describedby="basic-addon1" size="100">
+                        <label for="idp2" class="form-label">Idp</label>
+                        <input th:field="*{idp}" type="text" class="form-control" id="idp2" aria-label="Username"
+                               aria-describedby="basic-addon1" size="100">
 
-                <input type="submit" class="btn btn-primary" role="button" value="Sterge">
+                    </div>
 
-            </form>
+                    <input type="submit" class="btn btn-primary" role="button" value="Sterge">
 
-            <br>
+                </form>
 
-            <h2>Modificare comanda</h2>
-            <form action="#" th:action="@{/update_comanda}" th:object="${update_comanda}" method="post">
-                <div class="mb-3">
-                    <label for="idc3" class="form-label">Idc</label>
-                    <input th:field="*{idc}" type="text" class="form-control" id="idc3"  aria-label="Username" aria-describedby="basic-addon1" size="100">
-                    <label for="idf3" class="form-label">Idf</label>
-                    <input th:field="*{idf}" type="text" class="form-control" id="idf3" aria-label="Username" aria-describedby="basic-addon1" size="100">
-                    <label for="idp3" class="form-label">Idp</label>
-                    <input th:field="*{idp}" type="text" class="form-control" id="idp3"  aria-label="Username" aria-describedby="basic-addon1" size="100">
-                    <label for="cantitate3" class="form-label">Cantiate</label>
-                    <input th:field="*{cantitate}" type="text" class="form-control" id="cantitate3"  aria-label="Username" aria-describedby="basic-addon1" size="100">
-                </div>
+                <br>
 
-                <input type="submit" class="btn btn-primary" role="button" value="Modifica">
+                <h2>Modificare comanda</h2>
+                <form action="#" th:action="@{/update_comanda}" th:object="${update_comanda}" method="post">
+                    <div class="mb-3">
+                        <label for="idc3" class="form-label">Idc</label>
+                        <input th:field="*{idc}" type="text" class="form-control" id="idc3" aria-label="Username"
+                               aria-describedby="basic-addon1" size="100">
+                        <label for="idf3" class="form-label">Idf</label>
+                        <input th:field="*{idf}" type="text" class="form-control" id="idf3" aria-label="Username"
+                               aria-describedby="basic-addon1" size="100">
+                        <label for="idp3" class="form-label">Idp</label>
+                        <input th:field="*{idp}" type="text" class="form-control" id="idp3" aria-label="Username"
+                               aria-describedby="basic-addon1" size="100">
+                        <label for="cantitate3" class="form-label">Cantiate</label>
+                        <input th:field="*{cantitate}" type="text" class="form-control" id="cantitate3"
+                               aria-label="Username" aria-describedby="basic-addon1" size="100">
+                    </div>
 
-            </form>
+                    <input type="submit" class="btn btn-primary" role="button" value="Modifica">
+
+                </form>
 
 
+            </div>
         </div>
     </div>
-</div>
 
+</main>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+        crossorigin="anonymous"></script>
 </body>
 </html>
 

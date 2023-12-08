@@ -1,92 +1,106 @@
 <!doctype html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html th:replace="~{layout/base_layout :: layout(~{::title}, ~{::main})}" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Piesa</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 </head>
 <body>
 
-<div class="container my-5">
-    <div class="row p-4 pb-0 pe-lg-0 pt-lg-5 align-items-center rounded-3 border shadow-lg">
-        <div class="p-3 p-lg-5 pt-lg-3">
+<main>
 
-            <h1>Tabela Piese</h1>
-            <br>
-            <table class="table table-bordered border-primary table-striped table-hover">
+    <div class="container my-5">
+        <div class="row p-4 pb-0 pe-lg-0 pt-lg-5 align-items-center rounded-3 border shadow-lg">
+            <div class="p-3 p-lg-5 pt-lg-3">
 
-                <thead>
-                <tr>
-                    <th scope="col">Id</th>
-                    <th scope="col">Nume</th>
-                    <th scope="col">Culoare</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr th:each="piesa: ${piese}">
-                    <td th:text="${piesa.getIdp()}"></td>
-                    <td th:text="${piesa.getNumep()}"></td>
-                    <td th:text="${piesa.getCuloare()}"></td>
-                </tr>
+                <h1>Tabela Piese</h1>
+                <br>
+                <table class="table table-bordered border-primary table-striped table-hover">
 
-                </tbody>
-            </table>
+                    <thead>
+                    <tr>
+                        <th scope="col">Id</th>
+                        <th scope="col">Nume</th>
+                        <th scope="col">Culoare</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="piesa: ${piese}">
+                        <td th:text="${piesa.getIdp()}"></td>
+                        <td th:text="${piesa.getNumep()}"></td>
+                        <td th:text="${piesa.getCuloare()}"></td>
+                    </tr>
 
-            <br>
+                    </tbody>
+                </table>
 
-            <h2>Adaugare piesa</h2>
-            <form action="#" th:action="@{/piesa_noua}" th:object="${piesa_noua}" method="post">
-                <div class="mb-3">
-                    <label for="idp" class="form-label">Id</label>
-                    <input th:field="*{idp}" type="text" class="form-control" id="idp"  aria-label="Username" aria-describedby="basic-addon1" size="100">
-                    <label for="numep" class="form-label">Nume</label>
-                    <input th:field="*{numep}" type="text" class="form-control" id="numep"  aria-label="Username" aria-describedby="basic-addon1" size="100">
-                    <label for="culoare" class="form-label">Culoare</label>
-                    <input th:field="*{culoare}" type="text" class="form-control" id="culoare"  aria-label="Username" aria-describedby="basic-addon1" size="100">
-                </div>
+                <br>
 
-                <input type="submit" class="btn btn-primary" role="button" value="Adauga">
+                <h2>Adaugare piesa</h2>
+                <form action="#" th:action="@{/piesa_noua}" th:object="${piesa_noua}" method="post">
+                    <div class="mb-3">
+                        <label for="idp" class="form-label">Id</label>
+                        <input th:field="*{idp}" type="text" class="form-control" id="idp" aria-label="Username"
+                               aria-describedby="basic-addon1" size="100">
+                        <label for="numep" class="form-label">Nume</label>
+                        <input th:field="*{numep}" type="text" class="form-control" id="numep" aria-label="Username"
+                               aria-describedby="basic-addon1" size="100">
+                        <label for="culoare" class="form-label">Culoare</label>
+                        <input th:field="*{culoare}" type="text" class="form-control" id="culoare" aria-label="Username"
+                               aria-describedby="basic-addon1" size="100">
+                    </div>
 
-            </form>
+                    <input type="submit" class="btn btn-primary" role="button" value="Adauga">
 
-            <br>
+                </form>
 
-            <h2>Stergere piesa</h2>
-            <form action="#" th:action="@{/sterge_piesa}" th:object="${sterge_piesa}" method="post">
-                <div class="mb-3">
-                    <label for="idp2" class="form-label">Id</label>
-                    <input th:field="*{idp}" type="text" class="form-control" id="idp2"  aria-label="Username" aria-describedby="basic-addon1" size="100">
-                </div>
+                <br>
 
-                <input type="submit" class="btn btn-primary" role="button" value="Sterge">
+                <h2>Stergere piesa</h2>
+                <form action="#" th:action="@{/sterge_piesa}" th:object="${sterge_piesa}" method="post">
+                    <div class="mb-3">
+                        <label for="idp2" class="form-label">Id</label>
+                        <input th:field="*{idp}" type="text" class="form-control" id="idp2" aria-label="Username"
+                               aria-describedby="basic-addon1" size="100">
+                    </div>
 
-            </form>
+                    <input type="submit" class="btn btn-primary" role="button" value="Sterge">
 
-            <br>
+                </form>
 
-            <h2>Modificare piesa</h2>
-            <form action="#" th:action="@{/update_piesa}" th:object="${update_piesa}" method="post">
-                <div class="mb-3">
-                    <label for="idp3" class="form-label">Id</label>
-                    <input th:field="*{idp}" type="text" class="form-control" id="idp3"  aria-label="Username" aria-describedby="basic-addon1" size="100">
-                    <label for="numep3" class="form-label">Nume</label>
-                    <input th:field="*{numep}" type="text" class="form-control" id="numep3"  aria-label="Username" aria-describedby="basic-addon1" size="100">
-                    <label for="culoare3" class="form-label">Culoare</label>
-                    <input th:field="*{culoare}" type="text" class="form-control" id="culoare3"  aria-label="Username" aria-describedby="basic-addon1" size="100">
-                </div>
+                <br>
 
-                <input type="submit" class="btn btn-primary" role="button" value="Modifica">
+                <h2>Modificare piesa</h2>
+                <form action="#" th:action="@{/update_piesa}" th:object="${update_piesa}" method="post">
+                    <div class="mb-3">
+                        <label for="idp3" class="form-label">Id</label>
+                        <input th:field="*{idp}" type="text" class="form-control" id="idp3" aria-label="Username"
+                               aria-describedby="basic-addon1" size="100">
+                        <label for="numep3" class="form-label">Nume</label>
+                        <input th:field="*{numep}" type="text" class="form-control" id="numep3" aria-label="Username"
+                               aria-describedby="basic-addon1" size="100">
+                        <label for="culoare3" class="form-label">Culoare</label>
+                        <input th:field="*{culoare}" type="text" class="form-control" id="culoare3"
+                               aria-label="Username" aria-describedby="basic-addon1" size="100">
+                    </div>
 
-            </form>
+                    <input type="submit" class="btn btn-primary" role="button" value="Modifica">
+
+                </form>
 
 
+            </div>
         </div>
     </div>
-</div>
+
+</main>
 
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+        crossorigin="anonymous"></script>
 </body>
 </html>
 
