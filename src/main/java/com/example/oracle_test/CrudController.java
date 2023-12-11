@@ -1,9 +1,6 @@
 package com.example.oracle_test;
 
-import Dao.Catalog1JdbcDao;
-import Dao.ComandaJdbcDao;
-import Dao.FurnizorJdbcDao;
-import Dao.PiesaJdbcDao;
+import Dao.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.ui.Model;
@@ -194,4 +191,44 @@ public class CrudController {
         return "redirect:/comanda";
     }
 
+
+    @GetMapping("/surub_comandat")
+    public String getSurubComandat(Model model){
+        SurubComandatJdbcDao surubComandatDao = new SurubComandatJdbcDao(jdbcTemplate);
+
+        List<SurubComandat> suruburi = surubComandatDao.readAll();
+
+        System.out.println("Suruburi: ");
+        suruburi.forEach(System.out::println);
+
+        model.addAttribute("suruburi", suruburi);
+//        model.addAttribute("comanda_noua", new Comanda());
+//        model.addAttribute("sterge_comanda", new Comanda());
+//        model.addAttribute("update_comanda", new Comanda());
+
+        return "view";
+    }
+
+    @GetMapping("/exceptie")
+    public String getExceptie(Model model){
+        ExceptiiJdbcDao exceptiiJdbcDao = new ExceptiiJdbcDao(jdbcTemplate);
+
+        List<Exceptie> exceptii = exceptiiJdbcDao.readAll();
+
+        model.addAttribute("exceptii", exceptii);
+//        model.addAttribute("comanda_noua", new Comanda());
+//        model.addAttribute("sterge_comanda", new Comanda());
+//        model.addAttribute("update_comanda", new Comanda());
+
+        return "exceptie";
+    }
+
+    @PostMapping("/generare_exceptii")
+    public String generareExceptii(@ModelAttribute Comanda comanda){
+        ExceptiiJdbcDao exceptiiJdbcDao = new ExceptiiJdbcDao(jdbcTemplate);
+
+        int nr = exceptiiJdbcDao.generare_exceptii();
+        System.out.println(nr);
+        return "redirect:/exceptie";
+    }
 }

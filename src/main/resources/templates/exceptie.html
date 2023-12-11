@@ -1,0 +1,64 @@
+<!doctype html>
+<html th:replace="~{layout/base_layout :: layout(~{::title}, ~{::main})}" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Exceptii</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+</head>
+<body>
+
+<main>
+
+    <div class="container my-5">
+        <div class="row p-4 pb-0 pe-lg-0 pt-lg-5 align-items-center rounded-3 border shadow-lg">
+            <div class="p-3 p-lg-5 pt-lg-3">
+
+                <h1>Tabela Exceptii</h1>
+                <br>
+                <table class="table table-bordered border-primary table-striped table-hover">
+
+                    <thead>
+                    <tr>
+                        <th scope="col">Idp</th>
+                        <th scope="col">Idf</th>
+                        <th scope="col">Natura_exceptiei</th>
+                        <th scope="col">Idf2</th>
+
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="exceptie: ${exceptii}">
+                        <td th:text="${exceptie.getIdp()}"></td>
+                        <td th:text="${exceptie.getIdf()}"></td>
+                        <td th:text="${exceptie.getNatura_exceptiei()}"></td>
+                        <td th:text="${exceptie.getIdf2()}"></td>
+                    </tr>
+
+                    </tbody>
+                </table>
+
+                <br>
+
+                <h2>Generare Exceptii cu procedura stocata</h2>
+                <form action="#" th:action="@{/generare_exceptii}"  method="post">
+
+                    <input type="submit" class="btn btn-primary" role="button" value="Generati">
+
+                </form>
+
+            </div>
+        </div>
+    </div>
+
+</main>
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+        crossorigin="anonymous"></script>
+</body>
+</html>
+
+
