@@ -45,12 +45,13 @@ public class PiesaJdbcDao implements Dao<Piesa> {
 
     @Override
     public void deleteById(int idp) {
-        int deleted =  jdbcTemplate.update("DELETE FROM PIESE WHERE IDP=?", idp);
+        int deleted =  jdbcTemplate.update("call StergePiesa(?)", idp);
         System.out.println("Au fost sterse " + deleted + " piese");
     }
 
 
     public Integer nrPiese(int idp) {
-        return jdbcTemplate.queryForObject("SELECT TotalPieseComandate(" + idp + ") FROM dual", Integer.class);
+        String sql = "SELECT TOTALPIESECOMANDATE(" + idp + ") FROM dual";
+        return jdbcTemplate.queryForObject(sql, Integer.class);
     }
 }

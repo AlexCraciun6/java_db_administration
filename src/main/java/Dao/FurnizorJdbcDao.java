@@ -6,7 +6,6 @@ import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
-import java.util.Optional;
 
 @Component
 public class FurnizorJdbcDao implements Dao<Furnizor> {
@@ -33,18 +32,6 @@ public class FurnizorJdbcDao implements Dao<Furnizor> {
         }
     }
 
-//    @Override
-//    public Optional<Furnizor> findById(int idf) {
-//        try {
-//            Furnizor furnizor = jdbcTemplate.queryForObject("SELECT * FROM FURNIZORI WHERE IDF=?",
-//                    BeanPropertyRowMapper.newInstance(Furnizor.class), idf);
-//
-//            return Optional.ofNullable(furnizor);
-//        } catch (IncorrectResultSizeDataAccessException e) {
-//            return Optional.empty();
-//        }
-//    }
-
     @Override
     public void update(Furnizor furnizor) {
         int insert = jdbcTemplate.update("UPDATE FURNIZORI SET NUMEF=?, ADRESA=? WHERE IDF=?",
@@ -56,7 +43,7 @@ public class FurnizorJdbcDao implements Dao<Furnizor> {
 
     @Override
     public void deleteById(int idf) {
-        int deleted =  jdbcTemplate.update("DELETE FROM FURNIZORI WHERE IDF=?", idf);
+        int deleted =  jdbcTemplate.update("call StergeFurnizor(?)", idf);
         System.out.println("Au fost stersi " + deleted + " furnizori");
     }
 }

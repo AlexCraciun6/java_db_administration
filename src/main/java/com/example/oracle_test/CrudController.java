@@ -7,7 +7,6 @@ import org.springframework.ui.Model;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -49,15 +48,6 @@ public class CrudController {
         return "redirect:/furnizor";
     }
 
-//    @PostMapping("/furnizor_by_idf")
-//    public String furnizorByIdf(@ModelAttribute Furnizor furnizor){
-//        FurnizorJdbcDao fDao = new FurnizorJdbcDao(jdbcTemplate);
-//
-//        Optional<Furnizor> f = fDao.findById(furnizor.getIdf());
-//        System.out.println(f);
-//        return "redirect:/furnizor";
-//    }
-
     @PostMapping("/update_furnizor")
     public String updateFurnizor(@ModelAttribute Furnizor furnizor){
         FurnizorJdbcDao fDao = new FurnizorJdbcDao(jdbcTemplate);
@@ -78,9 +68,10 @@ public class CrudController {
         model.addAttribute("piesa_noua", new Piesa());
         model.addAttribute("sterge_piesa", new Piesa());
         model.addAttribute("update_piesa", new Piesa());
-        model.addAttribute("nr_piese",new Piesa());
+        model.addAttribute("nr_piese", new Piesa());
         model.addAttribute("nr_piese_var", nr_piese);
 
+        nr_piese=0;
         return "piesa";
     }
 
@@ -133,6 +124,7 @@ public class CrudController {
         model.addAttribute("update_catalog1", new Catalog1());
         model.addAttribute("reducere_var", reducere_idp);
 
+        reducere_idp=0;
         return "catalog1";
     }
 
@@ -188,6 +180,7 @@ public class CrudController {
         model.addAttribute("pret_comanda", new Comanda());
         model.addAttribute("pret_comanda_var", pret_comanda);
 
+        pret_comanda=0;
         return "comanda";
     }
 

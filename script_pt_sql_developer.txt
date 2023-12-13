@@ -464,16 +464,16 @@ END;
 /
 
 --functie care calucleaza cate piese s-au comandat pentru un idp
-CREATE OR REPLACE FUNCTION TotalPieseComandate(idp IN NUMBER)
+CREATE OR REPLACE FUNCTION TotalPieseComandate(idp_in IN NUMBER)
 RETURN NUMBER
 IS
   TotalComenzi NUMBER;
 BEGIN
   -- Calculăm numărul total de piese comandate
-  SELECT COUNT(DISTINCT idc)
+  SELECT COUNT(*)
   INTO TotalComenzi
   FROM Comenzi
-  WHERE idp = idp;
+  WHERE idp = idp_in;
 
   -- Returnăm rezultatul
   RETURN TotalComenzi;
@@ -510,4 +510,73 @@ BEGIN
   WHERE idp = IN_PiesaID;
 END AplicaReducerea;
 /
+
+--procedura care sterge furnizor avand grija sa stearga comenzile si catalogul asociate
+CREATE OR REPLACE PROCEDURE StergeFurnizor (
+    IDF_param IN NUMBER
+)
+IS
+    PieseExist NUMBER;
+    ComenziExist NUMBER;
+BEGIN
+    -- Verificăm dacă furnizorul are piese în catalog
+    SELECT COUNT(*)
+    INTO PieseExist
+    FROM Catalog1
+    WHERE IDF = IDF_param;
+
+    -- Verificăm dacă furnizorul are comenzi
+    SELECT COUNT(*)
+    INTO ComenziExist
+    FROM Comenzi
+    WHERE IDF = IDF_param;
+
+    -- Dacă furnizorul are comenzi, le ștergem
+    IF ComenziExist > 0 THEN
+        DELETE FROM Comenzi
+        WHERE IDF = IDF_param;
+    END IF;
+
+    -- Dacă furnizorul are piese în catalog, le ștergem
+    IF PieseExist > 0 THEN
+        DELETE FROM Catalog1
+        WHERE IDF = IDF_param;
+    END IF;
+
+    -- Ștergem furnizorul
+    DELETE FROM Furnizori
+    WHERE IDF = IDF_param;
+
+    DBMS_OUTPUT.PUT_LINE('Furnizorul a fost șters cu succes.');
+EXCEPTION
+    WHEN OTHERS THEN
+        DBMS_OUTPUT.PUT_LINE('Eroare: Furnizorul nu a putut fi șters.');
+END StergeFurnizor;
+/
+
+--procedura care sterge piesa avand grija sa stearga catalogul si comenzile aferente
+CREATE OR REPLACE PROCEDURE StergePiesa (
+    IDP_param IN NUMBER
+)
+IS
+BEGIN
+    -- Ștergem înregistrările din Comenzi
+    DELETE FROM Comenzi
+    WHERE IDP = IDP_param;
+
+    -- Ștergem înregistrările din Catalog
+    DELETE FROM Catalog1
+    WHERE IDP = IDP_param;
+
+    -- Ștergem înregistrările din Piese
+    DELETE FROM Piese
+    WHERE IDP = IDP_param;
+
+    DBMS_OUTPUT.PUT_LINE('Piesa a fost ștearsă cu succes.');
+EXCEPTION
+    WHEN OTHERS THEN
+        DBMS_OUTPUT.PUT_LINE('Eroare: Piesa nu a putut fi ștearsă.');
+END StergePiesa;
+/
+
 
