@@ -219,6 +219,7 @@ public class CrudController {
         return "redirect:/comanda";
     }
 
+    boolean inserted=false;
 
     @GetMapping("/surub_comandat")
     public String getSurubComandat(Model model){
@@ -226,16 +227,25 @@ public class CrudController {
 
         List<SurubComandat> suruburi = surubComandatDao.readAll();
 
-        System.out.println("Suruburi: ");
-        suruburi.forEach(System.out::println);
 
         model.addAttribute("suruburi", suruburi);
-//        model.addAttribute("comanda_noua", new Comanda());
-//        model.addAttribute("sterge_comanda", new Comanda());
-//        model.addAttribute("update_comanda", new Comanda());
+        model.addAttribute("surub_nou", new Comanda());
+        model.addAttribute("surub_nou_var", inserted);
 
+        inserted=false;
         return "view";
     }
+
+    @PostMapping("/surub_nou")
+    public String surubNou(@ModelAttribute SurubComandat surubComandat){
+        SurubComandatJdbcDao surubComandatDao = new SurubComandatJdbcDao(jdbcTemplate);
+
+        surubComandatDao.insert_surub(surubComandat.getIdc(), surubComandat.getIdf(), surubComandat.getIdp(), surubComandat.getCantitate());
+        inserted = true;
+        return "redirect:/surub_comandat";
+    }
+
+
 
     @GetMapping("/exceptie")
     public String getExceptie(Model model){

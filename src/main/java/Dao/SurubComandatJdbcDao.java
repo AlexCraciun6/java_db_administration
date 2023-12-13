@@ -19,4 +19,8 @@ public class SurubComandatJdbcDao {
                 "SELECT * from surub_comandat",
                 BeanPropertyRowMapper.newInstance(SurubComandat.class));
     }
+
+    public int insert_surub(int idc, int idf, int idp, int cantitate){
+        return jdbcTemplate.update("call AdaugaInComenziSurubComandat(?,?,?,?)", idc, idf, idp, cantitate);
+    }
 }

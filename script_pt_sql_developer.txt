@@ -579,4 +579,49 @@ EXCEPTION
 END StergePiesa;
 /
 
+--procedura echivalenta cu trigger ul instead of pe view
+CREATE OR REPLACE PROCEDURE AdaugaInComenziSurubComandat (
+    IDC_param IN NUMBER,
+    IDF_param IN NUMBER,
+    IDP_param IN NUMBER,
+    Cantitate_param IN NUMBER
+)
+IS
+    PiesaExists NUMBER;
+    Catalog1Exists NUMBER;
+    FurnizorExists NUMBER;
+BEGIN
+    -- Verificăm dacă piesa și furnizorul există în Piese, Catalog1 și Furnizori
+    SELECT COUNT(*)
+    INTO PiesaExists
+    FROM Piese
+    WHERE IDP = IDP_param;
+
+    SELECT COUNT(*)
+    INTO Catalog1Exists
+    FROM Catalog1
+    WHERE IDP = IDP_param AND IDF = IDF_param;
+
+    SELECT COUNT(*)
+    INTO FurnizorExists
+    FROM Furnizori
+    WHERE IDF = IDF_param;
+
+    IF PiesaExists > 0 AND Catalog1Exists > 0 AND FurnizorExists > 0 THEN
+        -- Adăugăm comanda în tabela Comenzi
+        INSERT INTO Comenzi (IDC, IDF, IDP, Cantitate)
+        VALUES (IDC_param, IDF_param, IDP_param, Cantitate_param);
+    ELSIF PiesaExists = 0 THEN
+        -- Aruncăm o excepție că Piesa nu există în Piese
+        RAISE_APPLICATION_ERROR(-20001, 'Piesa nu există în Piese.');
+    ELSIF FurnizorExists = 0 THEN
+        -- Aruncăm o excepție că Furnizorul nu există în Furnizori
+        RAISE_APPLICATION_ERROR(-20002, 'Furnizorul nu există în Furnizori.');
+    ELSIF Catalog1Exists = 0 THEN
+        -- Aruncăm o excepție că Piesa nu există în Catalog1 pentru Furnizor
+        RAISE_APPLICATION_ERROR(-20003, 'Piesa nu există în Catalog1 pentru Furnizor.');
+    END IF;
+END;
+/
+
 

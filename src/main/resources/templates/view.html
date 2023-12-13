@@ -49,7 +49,36 @@
 
                 <br>
 
+                <h2>Insereaza un surub prin view</h2>
+                <form action="#" th:action="@{/surub_nou}" th:object="${surub_nou}" method="post">
+                    <div class="mb-3">
+                        <label for="idc4" class="form-label">Idc</label>
+                        <input th:field="*{idc}" type="text" class="form-control" id="idc4" aria-label="Username"
+                               aria-describedby="basic-addon1" size="100">
+                        <label for="idf4" class="form-label">Idf</label>
+                        <input th:field="*{idf}" type="text" class="form-control" id="idf4" aria-label="Username"
+                               aria-describedby="basic-addon1" size="100">
+                        <label for="idp4" class="form-label">Idp</label>
+                        <input th:field="*{idp}" type="text" class="form-control" id="idp4" aria-label="Username"
+                               aria-describedby="basic-addon1" size="100">
+                        <label for="c" class="form-label">Cantitate</label>
+                        <input th:field="*{cantitate}" type="text" class="form-control" id="c" aria-label="Username"
+                               aria-describedby="basic-addon1" size="100">
+                    </div>
 
+                    <input type="submit" class="btn btn-primary" role="button" value="Insereaza">
+
+                </form>
+
+                <br>
+
+                <p class="lead mb-4" th:if="${surub_nou_var}">Surubul a fost inserat in tabela Comenzi</p>
+
+                <div class="d-grid gap-2 d-md-flex justify-content-md-start mb-4 mb-lg-3">
+                    <a href="http://localhost:8080/comanda" class="btn btn-primary" role="button">
+                        <span class="fs-4">Vizualizare tabela Comenzi</span>
+                    </a>
+                </div>
 
 
             </div>

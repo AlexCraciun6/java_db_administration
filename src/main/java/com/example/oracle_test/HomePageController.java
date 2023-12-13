@@ -6,6 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -31,20 +32,27 @@ public class HomePageController {
         return "crud";
     }
 
-    @GetMapping("/get_data_3a")
-    public String getData3a(Model model){
+    private List<Furnizor> furnizori_3a = new ArrayList<>();
+
+
+    @GetMapping("/interogare3a")
+    public String interogare3a(Model model){
+
+        List<Furnizor> furnizori_3a_copy = new ArrayList<>(furnizori_3a);
 
         model.addAttribute("ending", new Ending());
-        return "get_data_3a";
+        model.addAttribute("furnizori_3a", furnizori_3a_copy);
+
+        furnizori_3a.clear();
+        return "interogare_3a";
     }
 
-    @PostMapping("/interogare3a")
-    public String interogare3a(@ModelAttribute Ending ending, Model model){
+    @PostMapping("/ending_for_3a")
+    public String endingFor3a(@ModelAttribute Ending ending){
 
-        List<Furnizor> furnizori_3a = Interogari.getInterogare3a(jdbcTemplate, Integer.parseInt(ending.getEnding()));
+        furnizori_3a = Interogari.getInterogare3a(jdbcTemplate, Integer.parseInt(ending.getEnding()));
 
-        model.addAttribute("furnizori_3a", furnizori_3a);
-        return "interogare_3a";
+        return "redirect:/interogare3a";
     }
 
     @GetMapping("/interogare3b")
