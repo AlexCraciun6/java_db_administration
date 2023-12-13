@@ -47,4 +47,10 @@ public class ComandaJdbcDao {
         int deleted =  jdbcTemplate.update("DELETE FROM COMENZI WHERE IDC=? AND IDF=? AND IDP=?",idc, idf,  idp);
         System.out.println("Au fost sterse " + deleted + " comenzi");
     }
+
+    public Double pretComanda(int idc, int idf, int idp){
+        return jdbcTemplate.queryForObject(
+                "SELECT CalculValoareComanda( " + idc + " , " + idf + " , " + idp + ") FROM dual"
+                        , Double.class);
+    }
 }

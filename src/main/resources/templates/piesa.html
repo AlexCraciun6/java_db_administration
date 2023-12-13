@@ -90,6 +90,36 @@
 
                 </form>
 
+                <br>
+
+                <h2>Calculeaza cate piese au fost comandate</h2>
+                <form action="#" th:action="@{/nr_piese}" th:object="${nr_piese}" method="post">
+                    <div class="mb-3">
+                        <label for="idp4" class="form-label">Idc</label>
+                        <input th:field="*{idp}" type="text" class="form-control" id="idp4" aria-label="Username">
+                    </div>
+
+                    <input type="submit" class="btn btn-primary" role="button" value="Calculeaza">
+
+                </form>
+
+                <br>
+
+                <table class="table table-bordered border-primary table-striped table-hover" th:if="${nr_piese_var}">
+
+                    <thead>
+                    <tr>
+                        <th scope="col">Numar piese</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td th:text="${nr_piese_var}"></td>
+                    </tr>
+
+                    </tbody>
+                </table>
+
 
             </div>
         </div>

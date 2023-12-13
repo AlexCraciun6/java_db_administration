@@ -105,6 +105,43 @@
 
                 </form>
 
+                <br>
+
+                <h2>Calculeaza pretul comenzii</h2>
+                <form action="#" th:action="@{/pret_comanda}" th:object="${pret_comanda}" method="post">
+                    <div class="mb-3">
+                        <label for="idc4" class="form-label">Idc</label>
+                        <input th:field="*{idc}" type="text" class="form-control" id="idc4" aria-label="Username"
+                               aria-describedby="basic-addon1" size="100">
+                        <label for="idf4" class="form-label">Idf</label>
+                        <input th:field="*{idf}" type="text" class="form-control" id="idf4" aria-label="Username"
+                               aria-describedby="basic-addon1" size="100">
+                        <label for="idp4" class="form-label">Idp</label>
+                        <input th:field="*{idp}" type="text" class="form-control" id="idp4" aria-label="Username"
+                               aria-describedby="basic-addon1" size="100">
+                    </div>
+
+                    <input type="submit" class="btn btn-primary" role="button" value="Calculeaza">
+
+                </form>
+
+                <br>
+
+                <table class="table table-bordered border-primary table-striped table-hover" th:if="${pret_comanda_var}">
+
+                    <thead>
+                    <tr>
+                        <th scope="col">Pret</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td th:text="${pret_comanda_var}"></td>
+                    </tr>
+
+                    </tbody>
+                </table>
+
 
             </div>
         </div>

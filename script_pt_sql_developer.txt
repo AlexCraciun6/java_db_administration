@@ -1,3 +1,24 @@
+-- Ștergere tabela Comenzi
+DROP TABLE Comenzi;
+
+-- Ștergere tabela catalog1
+DROP TABLE catalog1;
+
+-- Ștergere tabela Piese
+DROP TABLE Piese;
+
+-- Ștergere tabela Furnizori
+DROP TABLE Furnizori;
+
+-- Ștergere tabela Exceptii
+DROP TABLE Exceptii;
+
+-- Ștergere procedura stocată
+DROP PROCEDURE GenerateExceptions;
+
+-- Ștergere vedere
+DROP VIEW surub_comandat;
+
 
 CREATE TABLE Furnizori (
     idf INT PRIMARY KEY,
@@ -9,7 +30,7 @@ CREATE TABLE Piese (
     numep VARCHAR(255),
     culoare VARCHAR(255)
 );
-CREATE TABLE Catalog1 (
+CREATE TABLE catalog1 (
     idf INT,
     idp INT,
     pret DECIMAL(10, 2),
@@ -30,10 +51,10 @@ CREATE TABLE Comenzi (
 
 
 
-ALTER TABLE Catalog1
+ALTER TABLE catalog1
 ADD moneda VARCHAR(3);
 
-ALTER TABLE Catalog1
+ALTER TABLE catalog1
 ADD CONSTRAINT check_pret_positive CHECK (pret >= 0);
 
 ALTER TABLE Piese
@@ -50,7 +71,7 @@ INSERT INTO Furnizori (idf, numef, adresa) VALUES (12, 'Furnizor12', 'Localitate
 INSERT INTO Furnizori (idf, numef, adresa) VALUES (15, 'Furnizor15', 'Localitate15, Strada15, 428');
 
 -- Inserare date pentru Piese
-INSERT INTO Piese (idp, numep, culoare) VALUES (1, 'Surub', 'Alb');
+INSERT INTO Piese (idp, numep, culoare) VALUES (1, 'surub', 'Alb');
 INSERT INTO Piese (idp, numep, culoare) VALUES (2, 'piuliță', 'alb');
 INSERT INTO Piese (idp, numep, culoare) VALUES (3, 'Bolt', 'Verde');
 INSERT INTO Piese (idp, numep, culoare) VALUES (4, 'Cui', 'Negru');
@@ -61,41 +82,43 @@ INSERT INTO Piese (idp, numep, culoare) VALUES (8, 'Lopata', 'Negru');
 INSERT INTO Piese (idp, numep, culoare) VALUES (9, 'Drujba', 'Portocaliu');
 INSERT INTO Piese (idp, numep, culoare) VALUES (10, 'Pensula', 'Rosu');
 INSERT INTO Piese (idp, numep, culoare) VALUES (11, 'Cleste', 'Maro');
+INSERT INTO Piese (idp, numep, culoare) VALUES (12, 'surub', 'Negru');
 
--- Inserare date pentru Catalog
-INSERT INTO Catalog1 (idf, idp, pret, moneda) VALUES (101, 1, 2.50, 'RON');
-INSERT INTO Catalog1 (idf, idp, pret, moneda) VALUES (101, 2, 1.50, 'RON');
-INSERT INTO Catalog1 (idf, idp, pret, moneda) VALUES (101, 3, 5.50, 'RON');
-INSERT INTO Catalog1 (idf, idp, pret, moneda) VALUES (101, 11, 8.50, 'RON');
+-- Inserare date pentru catalog1
+INSERT INTO catalog1 (idf, idp, pret, moneda) VALUES (101, 1, 2.50, 'RON');
+INSERT INTO catalog1 (idf, idp, pret, moneda) VALUES (101, 2, 1.50, 'RON');
+INSERT INTO catalog1 (idf, idp, pret, moneda) VALUES (101, 3, 5.50, 'RON');
+INSERT INTO catalog1 (idf, idp, pret, moneda) VALUES (101, 11, 8.50, 'RON');
 
-INSERT INTO Catalog1 (idf, idp, pret, moneda) VALUES (102, 1, 1.50, 'USD');
-INSERT INTO Catalog1 (idf, idp, pret, moneda) VALUES (102, 2, 1.00, 'USD');
-INSERT INTO Catalog1 (idf, idp, pret, moneda) VALUES (102, 5, 5.00, 'USD');
-INSERT INTO Catalog1 (idf, idp, pret, moneda) VALUES (102, 7, 6.00, 'USD');
-INSERT INTO Catalog1 (idf, idp, pret, moneda) VALUES (102, 9, 50.00, 'USD');
-INSERT INTO Catalog1 (idf, idp, pret, moneda) VALUES (102, 10, 3.00, 'USD');
-INSERT INTO Catalog1 (idf, idp, pret, moneda) VALUES (102, 11, 7.00, 'USD');
+INSERT INTO catalog1 (idf, idp, pret, moneda) VALUES (102, 1, 1.50, 'USD');
+INSERT INTO catalog1 (idf, idp, pret, moneda) VALUES (102, 2, 1.00, 'USD');
+INSERT INTO catalog1 (idf, idp, pret, moneda) VALUES (102, 5, 5.00, 'USD');
+INSERT INTO catalog1 (idf, idp, pret, moneda) VALUES (102, 7, 6.00, 'USD');
+INSERT INTO catalog1 (idf, idp, pret, moneda) VALUES (102, 9, 50.00, 'USD');
+INSERT INTO catalog1 (idf, idp, pret, moneda) VALUES (102, 10, 3.00, 'USD');
+INSERT INTO catalog1 (idf, idp, pret, moneda) VALUES (102, 11, 7.00, 'USD');
 
-INSERT INTO Catalog1 (idf, idp, pret, moneda) VALUES (103, 1, 1.00, 'EUR');
-INSERT INTO Catalog1 (idf, idp, pret, moneda) VALUES (103, 2, 1.00, 'EUR');
-INSERT INTO Catalog1 (idf, idp, pret, moneda) VALUES (103, 3, 2.50, 'EUR');
-INSERT INTO Catalog1 (idf, idp, pret, moneda) VALUES (103, 11, 3.00, 'EUR');
+INSERT INTO catalog1 (idf, idp, pret, moneda) VALUES (103, 1, 1.00, 'EUR');
+INSERT INTO catalog1 (idf, idp, pret, moneda) VALUES (103, 2, 1.00, 'EUR');
+INSERT INTO catalog1 (idf, idp, pret, moneda) VALUES (103, 3, 2.50, 'EUR');
+INSERT INTO catalog1 (idf, idp, pret, moneda) VALUES (103, 11, 3.00, 'EUR');
 
-INSERT INTO Catalog1 (idf, idp, pret, moneda) VALUES (12, 2, 3.90, 'EUR');
-INSERT INTO Catalog1 (idf, idp, pret, moneda) VALUES (12, 4, 4.23, 'EUR');
-INSERT INTO Catalog1 (idf, idp, pret, moneda) VALUES (12, 6, 8.60, 'EUR');
-INSERT INTO Catalog1 (idf, idp, pret, moneda) VALUES (12, 8, 11.00, 'EUR');
-INSERT INTO Catalog1 (idf, idp, pret, moneda) VALUES (12, 10, 25.90, 'EUR');
-INSERT INTO Catalog1 (idf, idp, pret, moneda) VALUES (12, 11, 3.20, 'EUR');
-INSERT INTO Catalog1 (idf, idp, pret, moneda) VALUES (12, 1, 1.00, 'EUR');
-INSERT INTO Catalog1 (idf, idp, pret, moneda) VALUES (12, 3, 2.25, 'EUR');
+INSERT INTO catalog1 (idf, idp, pret, moneda) VALUES (12, 2, 3.90, 'EUR');
+INSERT INTO catalog1 (idf, idp, pret, moneda) VALUES (12, 4, 4.23, 'EUR');
+INSERT INTO catalog1 (idf, idp, pret, moneda) VALUES (12, 6, 8.60, 'EUR');
+INSERT INTO catalog1 (idf, idp, pret, moneda) VALUES (12, 8, 11.00, 'EUR');
+INSERT INTO catalog1 (idf, idp, pret, moneda) VALUES (12, 10, 25.90, 'EUR');
+INSERT INTO catalog1 (idf, idp, pret, moneda) VALUES (12, 11, 3.20, 'EUR');
+INSERT INTO catalog1 (idf, idp, pret, moneda) VALUES (12, 1, 1.00, 'EUR');
+INSERT INTO catalog1 (idf, idp, pret, moneda) VALUES (12, 3, 2.25, 'EUR');
 
-INSERT INTO Catalog1 (idf, idp, pret, moneda) VALUES (15, 1, 2.50, 'EUR');
-INSERT INTO Catalog1 (idf, idp, pret, moneda) VALUES (15, 2, 3.75, 'EUR');
-INSERT INTO Catalog1 (idf, idp, pret, moneda) VALUES (15, 3, 4.50, 'EUR');
-INSERT INTO Catalog1 (idf, idp, pret, moneda) VALUES (15, 8, 10.90, 'USD');
-INSERT INTO Catalog1 (idf, idp, pret, moneda) VALUES (15, 9, 12.75, 'USD');
-INSERT INTO Catalog1 (idf, idp, pret, moneda) VALUES (15, 10, 1.99, 'USD');
+INSERT INTO catalog1 (idf, idp, pret, moneda) VALUES (15, 1, 2.50, 'EUR');
+INSERT INTO catalog1 (idf, idp, pret, moneda) VALUES (15, 2, 3.75, 'EUR');
+INSERT INTO catalog1 (idf, idp, pret, moneda) VALUES (15, 3, 4.50, 'EUR');
+INSERT INTO catalog1 (idf, idp, pret, moneda) VALUES (15, 8, 10.90, 'USD');
+INSERT INTO catalog1 (idf, idp, pret, moneda) VALUES (15, 9, 12.75, 'USD');
+INSERT INTO catalog1 (idf, idp, pret, moneda) VALUES (15, 10, 1.99, 'USD');
+INSERT INTO catalog1 (idf, idp, pret, moneda) VALUES (15, 12, 1.10, 'USD');
 
 -- Inserare date pentru Comenzi
 INSERT INTO Comenzi (idc, idf, idp, cantitate) VALUES (1, 101, 1, 1);
@@ -117,28 +140,28 @@ INSERT INTO Comenzi (idc, idf, idp, cantitate) VALUES (11, 102, 10, 3);
 INSERT INTO Comenzi (idc, idf, idp, cantitate) VALUES (12, 102, 1, 210);
 INSERT INTO Comenzi (idc, idf, idp, cantitate) VALUES (13, 102, 1, 400);
 INSERT INTO Comenzi (idc, idf, idp, cantitate) VALUES (14, 102, 5, 300);
-INSERT INTO Comenzi (idc, idf, idp, cantitate) VALUES (15, 102, 10, 76);
+INSERT INTO Comenzi (idc, idf, idp, cantitate) VALUES (14, 102, 10, 76);
 
 
 INSERT INTO Comenzi (idc, idf, idp, cantitate) VALUES (16, 103, 11, 4);
-INSERT INTO Comenzi (idc, idf, idp, cantitate) VALUES (17, 103, 1, 15);
+INSERT INTO Comenzi (idc, idf, idp, cantitate) VALUES (16, 103, 1, 15);
 INSERT INTO Comenzi (idc, idf, idp, cantitate) VALUES (18, 103, 1, 90);
 
 
 INSERT INTO Comenzi (idc, idf, idp, cantitate) VALUES (19, 12, 1, 250);
-INSERT INTO Comenzi (idc, idf, idp, cantitate) VALUES (20, 12, 2, 20);
-INSERT INTO Comenzi (idc, idf, idp, cantitate) VALUES (21, 12, 3, 11);
-INSERT INTO Comenzi (idc, idf, idp, cantitate) VALUES (22, 12, 4, 9);
-INSERT INTO Comenzi (idc, idf, idp, cantitate) VALUES (23, 12, 6, 8);
-INSERT INTO Comenzi (idc, idf, idp, cantitate) VALUES (24, 12, 8, 3);
-INSERT INTO Comenzi (idc, idf, idp, cantitate) VALUES (25, 12, 10, 45);
-INSERT INTO Comenzi (idc, idf, idp, cantitate) VALUES (26, 12, 11, 2);
-INSERT INTO Comenzi (idc, idf, idp, cantitate) VALUES (27, 12, 4, 1);
-INSERT INTO Comenzi (idc, idf, idp, cantitate) VALUES (28, 12, 4, 9);
-INSERT INTO Comenzi (idc, idf, idp, cantitate) VALUES (29, 12, 8, 101);
-INSERT INTO Comenzi (idc, idf, idp, cantitate) VALUES (30, 12, 10, 280);
-INSERT INTO Comenzi (idc, idf, idp, cantitate) VALUES (31, 12, 11, 34);
-INSERT INTO Comenzi (idc, idf, idp, cantitate) VALUES (32, 12, 11, 98);
+INSERT INTO Comenzi (idc, idf, idp, cantitate) VALUES (19, 12, 2, 20);
+INSERT INTO Comenzi (idc, idf, idp, cantitate) VALUES (19, 12, 3, 11);
+INSERT INTO Comenzi (idc, idf, idp, cantitate) VALUES (19, 12, 4, 9);
+INSERT INTO Comenzi (idc, idf, idp, cantitate) VALUES (19, 12, 6, 8);
+INSERT INTO Comenzi (idc, idf, idp, cantitate) VALUES (19, 12, 8, 3);
+INSERT INTO Comenzi (idc, idf, idp, cantitate) VALUES (20, 12, 10, 45);
+INSERT INTO Comenzi (idc, idf, idp, cantitate) VALUES (21, 12, 11, 2);
+INSERT INTO Comenzi (idc, idf, idp, cantitate) VALUES (22, 12, 4, 1);
+INSERT INTO Comenzi (idc, idf, idp, cantitate) VALUES (23, 12, 4, 9);
+INSERT INTO Comenzi (idc, idf, idp, cantitate) VALUES (24, 12, 8, 101);
+INSERT INTO Comenzi (idc, idf, idp, cantitate) VALUES (25, 12, 10, 280);
+INSERT INTO Comenzi (idc, idf, idp, cantitate) VALUES (26, 12, 11, 34);
+INSERT INTO Comenzi (idc, idf, idp, cantitate) VALUES (27, 12, 11, 98);
 
 
 INSERT INTO Comenzi (idc, idf, idp, cantitate) VALUES (33, 15, 1, 3);
@@ -152,62 +175,68 @@ INSERT INTO Comenzi (idc, idf, idp, cantitate) VALUES (40, 15, 3, 21);
 INSERT INTO Comenzi (idc, idf, idp, cantitate) VALUES (41, 15, 8, 50);
 INSERT INTO Comenzi (idc, idf, idp, cantitate) VALUES (42, 15, 9, 100);
 INSERT INTO Comenzi (idc, idf, idp, cantitate) VALUES (43, 15, 9, 250);
+INSERT INTO Comenzi (idc, idf, idp, cantitate) VALUES (43, 15, 12, 10);
 
 -- Interogari
 
+-- 3 a)
 SELECT *
 FROM Furnizori
 WHERE SUBSTR(adresa, -1) = '8'
 ORDER BY adresa;
 
+-- 3 b)
 SELECT *
 FROM Comenzi
 WHERE cantitate > 200 AND cantitate != 300;
 
-
+-- 4 a)
 SELECT Comenzi.idc, Comenzi.idf, Comenzi.idp, Comenzi.cantitate
 FROM Comenzi
-JOIN Catalog1 ON Comenzi.idf = Catalog1.idf AND Comenzi.idp = Catalog1.idp
-WHERE (Catalog1.pret * Comenzi.cantitate) BETWEEN 10 AND 20 AND Catalog1.moneda = 'EUR';
+JOIN catalog1 ON Comenzi.idf = catalog1.idf AND Comenzi.idp = catalog1.idp
+WHERE catalog1.pret BETWEEN 10 AND 20 AND catalog1.moneda = 'EUR';
 
+-- 4 b)
 SELECT DISTINCT c1.idf AS idf1, c2.idf AS idf2
 FROM Comenzi c1
-JOIN Comenzi c2 ON c1.idp = c2.idp AND c1.cantitate = c2.cantitate AND c1.idc < c2.idc AND c1.idf <> c2.idf;
+JOIN Comenzi c2 ON c1.idp = c2.idp AND c1.cantitate = c2.cantitate
+WHERE c1.idc < c2.idc AND c1.idf <> c2.idf;
 
-
+-- 5 a)
 SELECT DISTINCT f.numef
 FROM Furnizori f
 WHERE NOT EXISTS (
     SELECT c1.idp
-    FROM Catalog1 c1
+    FROM catalog1 c1
     WHERE c1.idf = 101
     MINUS
     SELECT c2.idp
-    FROM Catalog1 c2
+    FROM catalog1 c2
     WHERE c2.idf = f.idf
 ) and f.idf != 101;
 
+-- 5 b)
 SELECT *
-FROM Catalog1 c1
+FROM catalog1 c1
 WHERE NOT EXISTS (
     SELECT 1
-    FROM Catalog1 c2
+    FROM catalog1 c2
     WHERE c2.pret > c1.pret
 );
 
-
-
+-- 6 a)
 SELECT C.idf, C.moneda, MIN(C.pret) AS pret_minim, MAX(C.pret) AS pret_maxim
-FROM Catalog1 C
+FROM catalog1 C
 GROUP BY C.idf, C.moneda
 ORDER BY C.idf;
 
+-- 6 b)
 SELECT idc, COUNT(DISTINCT idp) AS numar_piese
 FROM Comenzi
 GROUP BY idc
 ORDER BY idc;
 
-
+-- 7 a)
 -- Adaugare comanda
 INSERT INTO Comenzi (idc, idf, idp, cantitate)
 VALUES (13, 12, 11, 14);
@@ -216,11 +245,12 @@ VALUES (13, 12, 11, 14);
 INSERT INTO Comenzi (idc, idf, idp, cantitate)
 VALUES (13, 15, 11, 16);
 
+-- 7 b)
 -- Identificarea furnizorilor fără piese furnizate
 DECLARE
   CURSOR furnizor_cursor IS
     SELECT DISTINCT f.idf FROM Furnizori f
-    WHERE NOT EXISTS (SELECT 1 FROM Catalog1 c WHERE f.idf = c.idf);
+    WHERE NOT EXISTS (SELECT 1 FROM catalog1 c WHERE f.idf = c.idf);
 
   furnizor_rec furnizor_cursor%ROWTYPE;
 BEGIN
@@ -229,8 +259,8 @@ BEGIN
     -- Ștergere înregistrări din Comenzi asociate furnizorului
     DELETE FROM Comenzi WHERE idf = furnizor_rec.idf;
 
-    -- Ștergere înregistrări din Catalog1 asociate furnizorului
-    DELETE FROM Catalog1 WHERE idf = furnizor_rec.idf;
+    -- Ștergere înregistrări din catalog1 asociate furnizorului
+    DELETE FROM catalog1 WHERE idf = furnizor_rec.idf;
 
     -- Ștergere furnizor
     DELETE FROM Furnizori WHERE idf = furnizor_rec.idf;
@@ -238,117 +268,116 @@ BEGIN
 END;
 /
 
-
+-- 7 c)
 -- Reducere preț pentru piesele comandate în cantitate mai mare de 200
-UPDATE Catalog1
+UPDATE catalog1
 SET pret = pret * 0.98
 WHERE idp IN (SELECT idp FROM Comenzi WHERE cantitate > 200);
 
 
+-- 8
 CREATE TABLE Exceptii (
   idp NUMBER,
   idf NUMBER,
-  natura_exceptiei VARCHAR2(50)
+  natura_exceptiei VARCHAR2(50),
+  idf2 NUMBER
 );
 
 
-CREATE OR REPLACE PROCEDURE GenerateExceptions AS
-  v_CountComenzi NUMBER;
-  v_Pret NUMBER;
-  v_FurnizorActual NUMBER;
-  v_FurnizorAlternativ NUMBER;
+create or replace PROCEDURE GenerateExceptions AS
+  Pidp NUMBER;
+  C1idf NUMBER;
+  C2idf NUMBER;
+  V_Count NUMBER;
+  Already_inserted NUMBER;
 BEGIN
-  FOR PiesaRec IN (SELECT * FROM Piese) LOOP
-    -- Verificăm câte comenzi există pentru această piesă
-    SELECT COUNT(*)
-    INTO v_CountComenzi
-    FROM Comenzi
-    WHERE idp = PiesaRec.idp;
+  FOR P IN (SELECT DISTINCT idp FROM catalog1) LOOP
+    Pidp := P.idp;
+    FOR C1 IN (SELECT DISTINCT idf, pret FROM catalog1 WHERE idp = P.idp) LOOP
+      C1idf := C1.idf;
+      FOR C2 IN (SELECT DISTINCT idf, pret FROM catalog1 WHERE idp = P.idp AND idf <> C1.idf) LOOP
+        C2idf := C2.idf;
+        IF C1.pret IS NOT NULL AND C2.pret IS NOT NULL THEN
+          -- Verificăm dacă există comenzi pentru piesa și furnizorii selectați
+          SELECT COUNT(*)
+          INTO V_Count
+          FROM Comenzi
+          WHERE idp = Pidp AND (idf = C1idf OR idf = C2idf);
 
-    IF v_CountComenzi > 0 THEN
-      FOR FurnizorRec IN (SELECT DISTINCT idf FROM Comenzi WHERE idp = PiesaRec.idp) LOOP
-        -- Verificăm dacă există furnizori diferiți pentru aceeași piesă
-        v_CountComenzi := 0;
+          -- Verificam ca perechea C1idf si C2idf sa nu existe deja
+          SELECT COUNT(*)
+          INTO Already_inserted
+          FROM Exceptii
+          WHERE idp = Pidp AND ((idf = C1idf AND idf2 = C2idf) OR (idf = C2idf AND idf2 = C1idf));
 
-        SELECT COUNT(*)
-        INTO v_CountComenzi
-        FROM Comenzi C1, Comenzi C2
-        WHERE C1.idp = PiesaRec.idp
-          AND C2.idp = PiesaRec.idp
-          AND C1.idf <> C2.idf;
 
-        IF v_CountComenzi = 0 THEN
-          -- Determinăm furnizorul alternativ
-          BEGIN
-            SELECT idf, pret
-            INTO v_FurnizorAlternativ, v_Pret
-            FROM Catalog1
-            WHERE idp = PiesaRec.idp
-              AND idf <> FurnizorRec.idf
-            FETCH FIRST 1 ROW ONLY;
 
-            -- Determinăm furnizorul actual
-            SELECT idf
-            INTO v_FurnizorActual
-            FROM Comenzi
-            WHERE idp = PiesaRec.idp
-              AND idf = FurnizorRec.idf
-            FETCH FIRST 1 ROW ONLY;
-
-            -- Adăugăm rândul în tabela Excepții
-            INSERT INTO Exceptii (idp, idf, natura_exceptiei)
-            VALUES (PiesaRec.idp, v_FurnizorActual, 'Preț mai mare');
-
-            INSERT INTO Exceptii (idp, idf, natura_exceptiei)
-            VALUES (PiesaRec.idp, v_FurnizorAlternativ, 'Preț mai mic');
-          EXCEPTION
-            WHEN NO_DATA_FOUND THEN
-              NULL; -- Ignorăm cazul în care nu găsim furnizor alternativ
-          END;
+          IF V_Count > 0 AND Already_inserted = 0 THEN
+            IF C1.pret = C2.pret THEN
+              INSERT INTO Exceptii (idp, idf, natura_exceptiei, idf2)
+              VALUES (Pidp, C1idf, 'Preț egal', C2idf);
+            ELSIF C1.pret < C2.pret THEN
+              INSERT INTO Exceptii (idp, idf, natura_exceptiei, idf2)
+              VALUES (Pidp, C1idf, 'Preț mai mic', C2idf);
+            ELSE
+              INSERT INTO Exceptii (idp, idf, natura_exceptiei, idf2)
+              VALUES (Pidp, C1idf, 'Preț mai mare', C2idf);
+            END IF;
+          END IF;
         END IF;
       END LOOP;
-    END IF;
+    END LOOP;
   END LOOP;
 END;
 /
 
+--begin
+-- GenerateExceptions();
+--end;
+
+--delete from exceptii;
+--select * from exceptii
+--order by idf
 
 
 
---triggere
+--9 triggere
 
+-- 9 a)
 CREATE OR REPLACE TRIGGER CheckMinPrice
 BEFORE INSERT ON Comenzi
 FOR EACH ROW
 DECLARE
   MinPrice NUMBER;
-  NewPret NUMBER;
+  SupplierPrice NUMBER;
 BEGIN
-  -- Stocăm noul pret într-o variabilă locală, selectat din tabela catalog1
-  -- verificam sa fie piesa de la furnizorul care se afla in insert-ul comenzii
-  SELECT pret
-  INTO NewPret
-  FROM Catalog1
-  Where idp = :NEW.idp and idf = :NEW.idf;
-
   -- Selectăm prețul minim pentru piesa la care se referă comanda
   SELECT MIN(pret)
   INTO MinPrice
-  FROM Catalog1
+  FROM catalog1
   WHERE idp = :NEW.idp;
 
-  -- Verificăm dacă prețul furnizorului din comandă este minim
-  IF NewPret <> MinPrice THEN
-    RAISE_APPLICATION_ERROR(-20001, 'Prețul furnizorului nu este minim pentru piesa comandată.');
+  -- Selectăm prețul furnizorului din catalog1 pentru piesa specificată în comandă
+  SELECT pret
+  INTO SupplierPrice
+  FROM catalog1
+  WHERE idp = :NEW.idp AND idf = :NEW.idf;
+
+  -- Verificăm dacă prețul furnizorului din comandă este mai mic decât minimul
+  IF SupplierPrice > MinPrice THEN
+    RAISE_APPLICATION_ERROR(-20004, 'Prețul furnizorului nu este minim pentru piesa comandată.');
   END IF;
 END;
 /
 
+--test
+--INSERT INTO Comenzi (idc, idf, idp, cantitate) VALUES (100, 12, 2, 10);
 
-CREATE VIEW surub_comandat AS 
+-- 9 b)
+CREATE VIEW surub_comandat AS
 
 SELECT idc, f.idf, numef, adresa, p.idp, culoare, pret, cantitate
-FROM Furnizori f, Piese p, Catalog1 t, Comenzi c
+FROM Furnizori f, Piese p, catalog1 t, Comenzi c
 WHERE p.numep = 'surub' AND
  f.idf = t.idf AND
  p.idp = t.idp AND
@@ -359,18 +388,126 @@ CREATE OR REPLACE TRIGGER InsteadOfInsertSurubComandat
 INSTEAD OF INSERT ON surub_comandat
 FOR EACH ROW
 DECLARE
-  new_idc NUMBER;
+    PiesaExists NUMBER;
+    catalog1Exists NUMBER;
+    FurnizorExists NUMBER;
 BEGIN
-  -- Generăm un nou ID pentru Comanda
-  SELECT MAX(idc) + 1 INTO new_idc FROM Comenzi;
+    -- Verificăm dacă piesa și furnizorul există în catalog1
+    SELECT COUNT(*)
+    INTO PiesaExists
+    FROM piese
+    WHERE idp = :NEW.idp;
 
-  -- Inserăm datele în Comenzi
-  INSERT INTO Comenzi (idc, idf, idp, cantitate)
-  VALUES (new_idc, :NEW.idf, :NEW.idp, :NEW.cantitate);
+    SELECT COUNT(*)
+    INTO catalog1Exists
+    FROM catalog1
+    WHERE idp = :NEW.idp AND idf = :NEW.idf;
+
+    SELECT COUNT(*)
+    INTO FurnizorExists
+    FROM furnizori
+    WHERE idf = :NEW.idf;
+
+    IF PiesaExists > 0 AND catalog1Exists > 0 AND FurnizorExists > 0 THEN
+        -- Adăugăm comanda în tabela Comanda
+        INSERT INTO Comenzi (idc, idf, idp, cantitate)
+        VALUES (:NEW.idc, :NEW.idf, :NEW.idp, :NEW.cantitate);
+    ELSIF PiesaExists = 0 THEN
+        -- Aruncăm o excepție că Piesa nu există în Piese
+        RAISE_APPLICATION_ERROR(-20001, 'Piesa nu există în Piese.');
+    ELSIF FurnizorExists = 0 THEN
+        -- Aruncăm o excepție că Furnizorul nu există în Furnizori
+        RAISE_APPLICATION_ERROR(-20002, 'Furnizorul nu există în Furnizori.');
+    ELSIF catalog1Exists = 0 THEN
+        -- Aruncăm o excepție că Piesa nu există în catalog1 pentru Furnizor
+        RAISE_APPLICATION_ERROR(-20003, 'Piesa nu există în catalog1 pentru Furnizor.');
+    END IF;
 END;
 /
 
+--INSERT INTO surub_comandat (idc, idf, numef, adresa, idp, culoare, pret, cantitate)
+--VALUES (44, 103, 'Furnizor1', 'Localitate1, Strada1, 123', 2, 'Alb', 0.5, 5);
+
+--piesa nu este in catalog1 pentru frunizor
+--INSERT INTO surub_comandat (idc, idf, numef, adresa, idp, culoare, pret, cantitate)
+--VALUES (45, 101, 'Furnizor1', 'Localitate1, Strada1, 123', 4, 'Alb', 0.5, 5);
+
+--piesa nu exista in piese
+--INSERT INTO surub_comandat (idc, idf, numef, adresa, idp, culoare, pret, cantitate)
+--VALUES (45, 101, 'Furnizor1', 'Localitate1, Strada1, 123', 30, 'Alb', 0.5, 5);
+
+--furnizorul nu exista in furnizori
+--INSERT INTO surub_comandat (idc, idf, numef, adresa, idp, culoare, pret, cantitate)
+--VALUES (45, 206, 'Furnizor206', 'Localitate2, Strada16, 206', 30, 'Alb', 0.5, 5);
 
 
 
+-- inca cateva functii si proceduri pentru imbunatatirea site-ului
+
+--functie care calucleaza pretul total al unei comenzi
+CREATE OR REPLACE FUNCTION CalculValoareComanda (
+    p_idc IN NUMBER,
+    p_idf IN NUMBER,
+    p_idp IN NUMBER
+) RETURN NUMBER
+AS
+    v_valoare NUMBER := 0;
+BEGIN
+    SELECT SUM(cantitate * pret)
+    INTO v_valoare
+    FROM Comenzi c
+    JOIN Catalog1 t ON c.idp = t.idp AND c.idf = t.idf
+    WHERE c.idc = p_idc AND c.idf = p_idf AND c.idp = p_idp;
+
+    RETURN v_valoare;
+END;
+/
+
+--functie care calucleaza cate piese s-au comandat pentru un idp
+CREATE OR REPLACE FUNCTION TotalPieseComandate(idp IN NUMBER)
+RETURN NUMBER
+IS
+  TotalComenzi NUMBER;
+BEGIN
+  -- Calculăm numărul total de piese comandate
+  SELECT COUNT(DISTINCT idc)
+  INTO TotalComenzi
+  FROM Comenzi
+  WHERE idp = idp;
+
+  -- Returnăm rezultatul
+  RETURN TotalComenzi;
+END;
+/
+
+--functie care returneaza cea mai cumparata piesa
+CREATE OR REPLACE FUNCTION CeaMaiCumparataPiesa RETURN NUMBER
+IS
+  PiesaCumparata NUMBER;
+BEGIN
+  -- Selectăm cea mai cumpărată piesă
+  SELECT idp
+  INTO PiesaCumparata
+  FROM (
+    SELECT idp, COUNT(DISTINCT idc) as NumarComenzi
+    FROM Comenzi
+    GROUP BY idp
+    ORDER BY NumarComenzi DESC
+  )
+  WHERE ROWNUM = 1;
+
+  RETURN PiesaCumparata;
+END CeaMaiCumparataPiesa;
+/
+
+--procedura care apica reducerea pentru acea piesa
+CREATE OR REPLACE PROCEDURE AplicaReducerea(IN_PiesaID IN NUMBER)
+IS
+BEGIN
+  -- Aplicăm reducerea de 5% la toți furnizorii care au piesa în catalog
+  UPDATE Catalog1
+  SET pret = pret * 0.95
+  WHERE idp = IN_PiesaID;
+END AplicaReducerea;
+/
 

@@ -47,4 +47,15 @@ public class Catalog1JdbcDao {
         int deleted =  jdbcTemplate.update("DELETE FROM CATALOG1 WHERE IDF=? AND IDP=?",idf,  idp);
         System.out.println("Au fost sterse " + deleted + " cataloage");
     }
+
+    public Integer reducerePret(){
+        return jdbcTemplate.queryForObject("SELECT CeaMaiCumparataPiesa() FROM dual", Integer.class);
+    }
+
+    public int aplicaReducerea(Integer idp){
+        return jdbcTemplate.update(
+                "UPDATE Catalog1" +
+                "  SET pret = pret * 0.95" +
+                "  WHERE idp = ?", idp);
+    }
 }

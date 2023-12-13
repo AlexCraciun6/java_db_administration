@@ -48,4 +48,9 @@ public class PiesaJdbcDao implements Dao<Piesa> {
         int deleted =  jdbcTemplate.update("DELETE FROM PIESE WHERE IDP=?", idp);
         System.out.println("Au fost sterse " + deleted + " piese");
     }
+
+
+    public Integer nrPiese(int idp) {
+        return jdbcTemplate.queryForObject("SELECT TotalPieseComandate(" + idp + ") FROM dual", Integer.class);
+    }
 }

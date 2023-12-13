@@ -101,6 +101,20 @@
 
                 </form>
 
+                <br>
+
+                <h2>Aplica o reducere la toti furnzizorii pentru cea mai cumparata piesa</h2>
+                <form action="#" th:action="@{/reducere}" method="post">
+
+                    <input type="submit" class="btn btn-primary" role="button" value="Calculeaza">
+
+                </form>
+
+                <br>
+
+                <p class="lead mb-4" th:if="${reducere_var}" th:text="'Cea mai cumparata piesa are id-ul: ' + ${reducere_var}"></p>
+                <p class="lead mb-4" th:if="${reducere_var}">Pretul a fost modificat</p>
+
 
             </div>
         </div>
