@@ -44,8 +44,9 @@
                 <form action="#" th:action="@{/ending_for_3a}" th:object="${ending}" method="post">
                     <div class="mb-3">
                         <label for="interogation_data" class="form-label">Terminatie</label>
-                        <input th:field="*{ending}" type="text" class="form-control" id="interogation_data"
+                        <input  th:field="*{ending}" type="text" class="form-control" id="interogation_data"
                                aria-label="Username" aria-describedby="basic-addon1" size="100">
+                        <div th:if="${#fields.hasErrors('ending')}" th:errors="*{ending}"></div>
                     </div>
 
                     <input type="submit" class="btn btn-primary" role="button" value="Afiseaza">

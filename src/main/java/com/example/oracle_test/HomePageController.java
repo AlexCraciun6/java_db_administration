@@ -1,10 +1,15 @@
 package com.example.oracle_test;
 
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.ui.Model;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.PositiveOrZero;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,6 +20,8 @@ public class HomePageController {
     public JdbcTemplate jdbcTemplate;
 
     public static class Ending{
+        @NotEmpty()
+        @PositiveOrZero()
         private String ending;
 
         public String getEnding() {
@@ -48,7 +55,14 @@ public class HomePageController {
     }
 
     @PostMapping("/ending_for_3a")
-    public String endingFor3a(@ModelAttribute Ending ending){
+    public String endingFor3a(@Valid Ending ending, BindingResult bindingResult, Model model){
+        if (bindingResult.hasErrors()) {
+
+            model.addAttribute("ending", ending);
+            model.addAttribute("furnizori_3a", furnizori_3a);
+
+            return "interogare_3a";
+        }
 
         furnizori_3a = Interogari.getInterogare3a(jdbcTemplate, Integer.parseInt(ending.getEnding()));
 
@@ -57,6 +71,7 @@ public class HomePageController {
 
     @GetMapping("/interogare3b")
     public String interogare3b(Model model){
+
         List<Comanda> comenzi_3b = Interogari.getInterogare3b(jdbcTemplate);
 
         model.addAttribute("comenzi_3b", comenzi_3b);
