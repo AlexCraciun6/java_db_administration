@@ -41,7 +41,7 @@ public class Interogari {
                 "SELECT Comenzi.idc, Comenzi.idf, Comenzi.idp, Comenzi.cantitate\n" +
                         "FROM Comenzi\n" +
                         "JOIN Catalog1 ON Comenzi.idf = Catalog1.idf AND Comenzi.idp = Catalog1.idp\n" +
-                        "WHERE (Catalog1.pret * Comenzi.cantitate) BETWEEN 10 AND 20 AND Catalog1.moneda = 'EUR'";
+                        "WHERE Catalog1.pret BETWEEN 10 AND 20 AND Catalog1.moneda = 'EUR'";
 
         List<Comanda> comenzi_4a = jdbcTemplate.query(sql_4a,
                 BeanPropertyRowMapper.newInstance(Comanda.class));
@@ -53,7 +53,8 @@ public class Interogari {
     public static List<Comanda_4b> getInterogare4b(JdbcTemplate jdbcTemplate) {
         String sql_4b = "SELECT DISTINCT c1.idf AS idf1, c2.idf AS idf2\n" +
                 "FROM Comenzi c1\n" +
-                "JOIN Comenzi c2 ON c1.idp = c2.idp AND c1.cantitate = c2.cantitate AND c1.idc < c2.idc AND c1.idf <> c2.idf";
+                "JOIN Comenzi c2 ON c1.idp = c2.idp AND c1.cantitate = c2.cantitate\n" +
+                "WHERE c1.idc < c2.idc AND c1.idf <> c2.idf";
 
         List<Comanda_4b> comenzi_4b = jdbcTemplate.query(sql_4b,
                 BeanPropertyRowMapper.newInstance(Comanda_4b.class));
@@ -62,18 +63,18 @@ public class Interogari {
         return comenzi_4b;
     }
 
-    public static List<String> getInterogare5a(JdbcTemplate jdbcTemplate) {
+    public static List<String> getInterogare5a(JdbcTemplate jdbcTemplate, int idf) {
         String sql_5a = "SELECT DISTINCT f.numef\n" +
                 "FROM Furnizori f\n" +
                 "WHERE NOT EXISTS (\n" +
                 "    SELECT c1.idp\n" +
                 "    FROM Catalog1 c1\n" +
-                "    WHERE c1.idf = 101\n" +
+                "    WHERE c1.idf = " + idf + "\n" +
                 "    MINUS\n" +
                 "    SELECT c2.idp\n" +
                 "    FROM Catalog1 c2\n" +
                 "    WHERE c2.idf = f.idf\n" +
-                ") and f.idf != 101";
+                ") and f.idf != " + idf;
 
         List<Furnizor> furnziori_5a = jdbcTemplate.query(sql_5a,
                 BeanPropertyRowMapper.newInstance(Furnizor.class));
@@ -81,7 +82,7 @@ public class Interogari {
         List<String> nume_furnizori = new ArrayList<String>();
         for (Furnizor f : furnziori_5a)
             nume_furnizori.add(f.getNumef());
-        ;
+
         return nume_furnizori;
     }
 

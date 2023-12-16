@@ -17,9 +17,9 @@
                 <h1>Interogarea 5a</h1>
                 <br>
                 <p class="lead"> Să se găsească numele furnizorilor care au în catalog toate piesele din catalog ale
-                    furnizorului cu idf 101.</p>
+                    furnizorului cu idf dorit.</p>
                 <br>
-                <table class="table table-bordered border-primary table-striped table-hover">
+                <table class="table table-bordered border-primary table-striped table-hover"  th:if="${furnizori_5a.size() != 0}">
                     <thead>
                     <tr>
                         <th scope="col">Nume furnizor</th>
@@ -33,6 +33,17 @@
 
                     </tbody>
                 </table>
+
+                <form action="#" th:action="@{/data_for_5a}" th:object="${furnizor}" method="post">
+                    <div class="mb-3">
+                        <label for="interogation_data" class="form-label">Idf</label>
+                        <input  th:field="*{idf}" type="text" class="form-control" id="interogation_data"
+                                aria-label="Username" aria-describedby="basic-addon1" size="100">
+                        <div class="alert alert-danger" th:if="${#fields.hasErrors('idf')}" th:errors="*{idf}"></div>
+                    </div>
+
+                    <input type="submit" class="btn btn-primary" role="button" value="Afiseaza">
+                </form>
 
             </div>
         </div>

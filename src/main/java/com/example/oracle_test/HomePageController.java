@@ -61,6 +61,7 @@ public class HomePageController {
             model.addAttribute("ending", ending);
             model.addAttribute("furnizori_3a", furnizori_3a);
 
+            furnizori_3a.clear();
             return "interogare_3a";
         }
 
@@ -95,13 +96,33 @@ public class HomePageController {
         return "interogare_4b";
     }
 
+    List<String> furnizori_5a = new ArrayList<>();
+
     @GetMapping("/interogare5a")
     public String interogare5a(Model model){
 
-        List<String> furnizori_5a = Interogari.getInterogare5a(jdbcTemplate);
+        List<String> furnizori_5a_copy = new ArrayList<>(furnizori_5a);
 
-        model.addAttribute("furnizori_5a", furnizori_5a);
+        model.addAttribute("furnizori_5a", furnizori_5a_copy);
+        model.addAttribute("furnizor", new Furnizor());
+
+        furnizori_5a.clear();
         return "interogare_5a";
+    }
+
+    @PostMapping("/data_for_5a")
+    public String dataFor5a(@Valid Furnizor furnizor, BindingResult bindingResult, Model model){
+        if(bindingResult.hasFieldErrors("idf"))
+        {
+            model.addAttribute("furnizori_5a", furnizori_5a);
+            model.addAttribute("furnizor", furnizor);
+
+            return "interogare_5a";
+        }
+
+        furnizori_5a = Interogari.getInterogare5a(jdbcTemplate, furnizor.getIdf());
+
+        return "redirect:/interogare5a";
     }
 
     @GetMapping("/interogare5b")
