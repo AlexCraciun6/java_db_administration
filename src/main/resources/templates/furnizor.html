@@ -44,12 +44,15 @@
                         <label for="idf" class="form-label">Id</label>
                         <input th:field="*{idf}" type="text" class="form-control" id="idf" aria-label="Username"
                                aria-describedby="basic-addon1" size="100">
+                        <div class="alert alert-danger" th:if="${#fields.hasErrors('idf')}" th:errors="*{idf}">Idf Errors</div>
                         <label for="numef" class="form-label">Nume</label>
                         <input th:field="*{numef}" type="text" class="form-control" id="numef" aria-label="Username"
                                aria-describedby="basic-addon1" size="100">
+                        <div class="alert alert-danger" th:if="${#fields.hasErrors('numef')}" th:errors="*{numef}">numef Errors</div>
                         <label for="adresa" class="form-label">Adresa</label>
                         <input th:field="*{adresa}" type="text" class="form-control" id="adresa" aria-label="Username"
                                aria-describedby="basic-addon1" size="100">
+                        <div class="alert alert-danger" th:if="${#fields.hasErrors('adresa')}" th:errors="*{adresa}">adresa Errors</div>
                     </div>
 
                     <input type="submit" class="btn btn-primary" role="button" value="Adauga">
@@ -64,11 +67,13 @@
                         <label for="idf2" class="form-label">Id</label>
                         <input th:field="*{idf}" type="text" class="form-control" id="idf2" aria-label="Username"
                                aria-describedby="basic-addon1" size="100">
+                        <div class="alert alert-danger" th:if="${#fields.hasErrors('idf')}" th:errors="*{idf}">Idf Errors</div>
                     </div>
 
                     <input type="submit" class="btn btn-primary" role="button" value="Sterge">
 
                 </form>
+
 
                 <br>
 
@@ -78,12 +83,15 @@
                         <label for="idf3" class="form-label">Id</label>
                         <input th:field="*{idf}" type="text" class="form-control" id="idf3" aria-label="Username"
                                aria-describedby="basic-addon1" size="100">
+                        <div class="alert alert-danger" th:if="${#fields.hasErrors('idf')}" th:errors="*{idf}">Idf Errors</div>
                         <label for="numef3" class="form-label">Nume</label>
                         <input th:field="*{numef}" type="text" class="form-control" id="numef3" aria-label="Username"
                                aria-describedby="basic-addon1" size="100">
+                        <div class="alert alert-danger" th:if="${#fields.hasErrors('numef')}" th:errors="*{numef}">numef Errors</div>
                         <label for="adresa3" class="form-label">Adresa</label>
                         <input th:field="*{adresa}" type="text" class="form-control" id="adresa3" aria-label="Username"
                                aria-describedby="basic-addon1" size="100">
+                        <div class="alert alert-danger" th:if="${#fields.hasErrors('adresa')}" th:errors="*{adresa}">adresa Errors</div>
                     </div>
 
                     <input type="submit" class="btn btn-primary" role="button" value="Modifica">

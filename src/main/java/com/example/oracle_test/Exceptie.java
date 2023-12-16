@@ -1,9 +1,20 @@
 package com.example.oracle_test;
 
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.PositiveOrZero;
+
 public class Exceptie {
+    @NotNull
+    @PositiveOrZero
     private int idp;
+    @NotNull
+    @PositiveOrZero
     private int idf;
+    @NotEmpty
     private String natura_exceptiei;
+    @NotNull
+    @PositiveOrZero
     private int idf2;
 
     public Exceptie(int idp, int idf, String natura_exceptiei, int idf2) {

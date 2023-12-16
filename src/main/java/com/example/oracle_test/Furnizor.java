@@ -1,8 +1,16 @@
 package com.example.oracle_test;
 
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.PositiveOrZero;
+
 public class Furnizor {
+    @NotNull
+    @PositiveOrZero
     private int idf;
+    @NotEmpty
     private String numef;
+    @NotEmpty
     private String adresa;
 
     public int getIdf() {

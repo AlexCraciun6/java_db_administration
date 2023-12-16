@@ -1,10 +1,12 @@
 package com.example.oracle_test;
 
 import Dao.*;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.ui.Model;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -15,24 +17,33 @@ public class CrudController {
     @Autowired
     public JdbcTemplate jdbcTemplate;
 
-
-    @GetMapping("/furnizor")
-    public String getFurnizor(Model model){
+    public String renderFurnizor(Model model,@Valid Furnizor newFurnizor, @Valid Furnizor deleteFurnizor,@Valid Furnizor updateFurnizor)
+    {
         FurnizorJdbcDao fDao = new FurnizorJdbcDao(jdbcTemplate);
 
         List<Furnizor> furnizori = fDao.readAll();
 
         model.addAttribute("furnizori", furnizori);
-        model.addAttribute("furnizor_nou", new Furnizor());
-        model.addAttribute("sterge_furnizor", new Furnizor());
-        model.addAttribute("update_furnizor", new Furnizor());
+        model.addAttribute("furnizor_nou", newFurnizor);
+        model.addAttribute("sterge_furnizor", deleteFurnizor);
+        model.addAttribute("update_furnizor", updateFurnizor);
 
         return "furnizor";
     }
 
+    @GetMapping("/furnizor")
+    public String getFurnizor(Model model){
+        return renderFurnizor(model, new Furnizor(), new Furnizor(), new Furnizor());
+    }
+
     @PostMapping("/furnizor_nou")
-    public String newFurnizor(@ModelAttribute Furnizor furnizor)
+    public String newFurnizor(@Valid Furnizor furnizor, BindingResult bindingResult, Model model)
     {
+        if(bindingResult.hasErrors()){
+            System.out.println(bindingResult.getAllErrors());
+            return renderFurnizor(model, furnizor, new Furnizor(), new Furnizor());
+        }
+
         FurnizorJdbcDao fDao = new FurnizorJdbcDao(jdbcTemplate);
 
         fDao.create(furnizor);
@@ -40,8 +51,13 @@ public class CrudController {
     }
 
     @PostMapping("/sterge_furnizor")
-    public String deleteFurnizor(@ModelAttribute Furnizor furnizor)
+    public String deleteFurnizor(@Valid Furnizor furnizor, BindingResult bindingResult, Model model)
     {
+        if(bindingResult.hasErrors()){
+            System.out.println(bindingResult.getAllErrors());
+            return renderFurnizor(model, new Furnizor(), furnizor, new Furnizor());
+
+        }
         FurnizorJdbcDao fDao = new FurnizorJdbcDao(jdbcTemplate);
 
         fDao.deleteById(furnizor.getIdf());
@@ -49,7 +65,11 @@ public class CrudController {
     }
 
     @PostMapping("/update_furnizor")
-    public String updateFurnizor(@ModelAttribute Furnizor furnizor){
+    public String updateFurnizor(@Valid Furnizor furnizor, BindingResult bindingResult, Model model){
+        if(bindingResult.hasErrors()){
+            return renderFurnizor(model, new Furnizor(), new Furnizor(), furnizor);
+        }
+
         FurnizorJdbcDao fDao = new FurnizorJdbcDao(jdbcTemplate);
 
         fDao.update(furnizor);

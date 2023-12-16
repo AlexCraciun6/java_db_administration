@@ -1,8 +1,16 @@
 package com.example.oracle_test;
 
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.PositiveOrZero;
+
 public class Piesa {
+    @NotNull
+    @PositiveOrZero
     private int idp;
+    @NotEmpty
     private String numep;
+    @NotEmpty
     private String culoare;
 
     public Piesa(int idp, String numep, String culoare) {

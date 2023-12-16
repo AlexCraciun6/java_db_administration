@@ -44,12 +44,15 @@
                         <label for="idp" class="form-label">Id</label>
                         <input th:field="*{idp}" type="text" class="form-control" id="idp" aria-label="Username"
                                aria-describedby="basic-addon1" size="100">
+                        <div class="alert alert-danger" th:if="${#fields.hasErrors('idp')}" th:errors="*{idp}"></div>
                         <label for="numep" class="form-label">Nume</label>
                         <input th:field="*{numep}" type="text" class="form-control" id="numep" aria-label="Username"
                                aria-describedby="basic-addon1" size="100">
+                        <div class="alert alert-danger" th:if="${#fields.hasErrors('numep')}" th:errors="*{numep}"></div>
                         <label for="culoare" class="form-label">Culoare</label>
                         <input th:field="*{culoare}" type="text" class="form-control" id="culoare" aria-label="Username"
                                aria-describedby="basic-addon1" size="100">
+                        <div class="alert alert-danger" th:if="${#fields.hasErrors('culoare')}" th:errors="*{culoare}"></div>
                     </div>
 
                     <input type="submit" class="btn btn-primary" role="button" value="Adauga">
@@ -64,6 +67,7 @@
                         <label for="idp2" class="form-label">Id</label>
                         <input th:field="*{idp}" type="text" class="form-control" id="idp2" aria-label="Username"
                                aria-describedby="basic-addon1" size="100">
+                        <div class="alert alert-danger" th:if="${#fields.hasErrors('idp')}" th:errors="*{idp}"></div>
                     </div>
 
                     <input type="submit" class="btn btn-primary" role="button" value="Sterge">

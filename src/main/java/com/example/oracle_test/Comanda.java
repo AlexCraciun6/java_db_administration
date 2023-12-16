@@ -1,9 +1,20 @@
 package com.example.oracle_test;
 
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.PositiveOrZero;
+
 public class Comanda {
+    @NotNull
+    @PositiveOrZero
     private int idc;
+    @NotNull
+    @PositiveOrZero
     private int idp;
+    @NotNull
+    @PositiveOrZero
     private int idf;
+    @NotNull
+    @PositiveOrZero
     private int cantitate;
 
     public int getIdc() {
