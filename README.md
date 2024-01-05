@@ -5,6 +5,12 @@ This project is a Java Spring Boot application designed to manage a database wit
 
 ## Visual representation
 
+<img src="src/main/resources/static/screenshots/home_page.png" alt="Home page" width="1920">
+
+<img src="src/main/resources/static/screenshots/crud.png" alt="Crud op" width="1920">
+
+<img src="src/main/resources/static/screenshots/furnizori.png" alt="Furnizori" width="1920">
+
 
 ## Installation and Usage Instructions (for End-Users)
 To use this application, follow these steps:
